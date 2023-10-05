@@ -17,10 +17,8 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 ## About    
 
-![Screenshot from 2023-10-05 17-11-12](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
-
-
 The design is based on 180nm MOS technology and 6T SRAM design.
+
 ## Specifications 
 
 Supply Voltage : 1.8V
@@ -35,6 +33,11 @@ Current supply : 8 uA
 
 
 ## Design
+
+
+![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
+
+
 ## Design testbench
 ## Result analysis
 ## Conclusion
