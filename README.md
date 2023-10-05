@@ -17,6 +17,8 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 ## About    
 
+!(https://github.com/RudranshKi/SRAM/blob/main/Screenshot%20from%202023-10-05%2017-11-12.png)
+
 The design is based on 180nm MOS technology and 6T SRAM design.
 ## Specifications 
 
