@@ -36,7 +36,8 @@ Current supply : 8 uA
 
 
 ![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
-
+|:--:| 
+| *16 byte SRAM* |
 
 ## Design testbench
 ## Result analysis
