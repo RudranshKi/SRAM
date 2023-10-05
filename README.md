@@ -39,6 +39,14 @@ Current supply : 8 uA
 |:--:| 
 | *16 byte SRAM* |
 
+![8 bit Pre Charge Circuit](https://github.com/RudranshKi/SRAM/assets/110120694/233d80fe-fe6e-4efb-8341-e024fb755695)
+|:--:| 
+| *8 bit Pre Charge Circuit* |
+
+![Row Decoder](https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd)
+|:--:| 
+| *Row Decoder* |
+
 ## Design testbench
 ## Result analysis
 ## Conclusion
