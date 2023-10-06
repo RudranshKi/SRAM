@@ -19,6 +19,19 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 The design is based on 180nm MOS technology and 6T SRAM design.
 
+## 6T SRAM cell
+
+![Senseamp_1bit](https://github.com/RudranshKi/SRAM/assets/110120694/91758be9-7e9d-48cc-b7ea-090f6964ccdf)
+|:--:| 
+| *Sense amp (6T)* |
+
+1. 1 bit memory device
+2. 2 inverters connected in feedback
+3. As long as supply voltage is on, they retain the memory
+4. To write we need to forcefully manipulate the node voltages of the inverter
+
+   
+
 ## Specifications 
 
 Supply Voltage : 1.8V
