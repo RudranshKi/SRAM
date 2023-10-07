@@ -41,7 +41,8 @@ Procedure for writing in 6T SRAM :
     3. The input sources for data we provide tried to forcefully alter the voltage in the SRAM inverter.
     4. For that we need to find the appropriate sizing for the transistors involved in the data writing process.
 
-![Write_path](https://github.com/RudranshKi/SRAM/assets/110120694/ef87047e-10e0-4080-b72d-4055f16712a4)
+
+![WRITE_path(1)](https://github.com/RudranshKi/SRAM/assets/110120694/1fdc17f1-5b9b-41fd-bc98-4584f1c64e05)
 |:--:| 
 | *WRITE PATH* |
 
