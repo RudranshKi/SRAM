@@ -20,7 +20,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 The design is based on 180nm MOS technology and 6T SRAM design.
 
 ## 6T SRAM cell
-![6T SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/3c2ee50d-2515-4fea-b71e-34c5978dce62)
+![6T SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/9f6e0d71-e67f-4fbc-b913-a254151d34c1)
 |:--:| 
 | *Sense amp (6T)* |
 
@@ -29,7 +29,21 @@ The design is based on 180nm MOS technology and 6T SRAM design.
 3. As long as supply voltage is on, they retain the memory
 4. To write we need to forcefully manipulate the node voltages of the inverter
 
-   
+### Operation  
+
+#### WRITE
+
+
+#### READ
+
+
+
+![read_path](https://github.com/RudranshKi/SRAM/assets/110120694/8093b07b-0e1d-41c2-a90e-96a548188ebb)
+
+To find the width for transistors in read operation :
+
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/c7c425ef-620b-4cb1-8a96-761fea1facda)
+
 
 ## Specifications 
 
