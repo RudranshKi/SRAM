@@ -20,8 +20,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 The design is based on 180nm MOS technology and 6T SRAM design.
 
 ## 6T SRAM cell
-
-![Senseamp_1bit](https://github.com/RudranshKi/SRAM/assets/110120694/91758be9-7e9d-48cc-b7ea-090f6964ccdf)
+![6T SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/3c2ee50d-2515-4fea-b71e-34c5978dce62)
 |:--:| 
 | *Sense amp (6T)* |
 
