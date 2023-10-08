@@ -159,6 +159,8 @@ Current supply : 8 uA
 |:--:| 
 | *16 byte SRAM* |
 
+Inside the blocks :
+
 ![8 bit Pre Charge Circuit](https://github.com/RudranshKi/SRAM/assets/110120694/233d80fe-fe6e-4efb-8341-e024fb755695)
 |:--:| 
 | *8 bit Pre Charge Circuit* |
@@ -175,12 +177,26 @@ Current supply : 8 uA
 |:--:| 
 | *8 bit Sense amplifier* |
 
-![SRAM_16_byte](https://github.com/RudranshKi/SRAM/assets/110120694/a06e8f14-ef8c-4819-b0a4-8d09090c75ff)
-|:--:| 
-| *16 byte SRAM full schematic connection* |
 
 ## Design testbench
 
+![Testbench](https://github.com/RudranshKi/SRAM/assets/110120694/2014c61b-b766-463b-b216-d391da3261b5)
+|:--:| 
+| *16byte SRAM testbenchr* |
+
+![ADE_L_setup](https://github.com/RudranshKi/SRAM/assets/110120694/28315818-ae21-4090-b03b-511e78e9ca01)
+|:--:| 
+| *Test settings* |
+
 
 ## Result analysis
+
+![Process corner](https://github.com/RudranshKi/SRAM/assets/110120694/73fc6827-fdd4-4e44-8dff-16a58ecff644)
+|:--:| 
+| *Process Corner test analysis* |
+
+![SRAM_working](https://github.com/RudranshKi/SRAM/assets/110120694/7b432393-22c6-406b-ade3-d529450b03a3)
+|:--:| 
+| *SRAM RD/WR* |
+
 ## Conclusion
