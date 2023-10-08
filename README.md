@@ -57,9 +57,20 @@ Procedure for writing in 6T SRAM :
     4. For that we need to find the appropriate sizing for the transistors involved in the data writing process.
 
 
-![WRITE_path(1)](https://github.com/RudranshKi/SRAM/assets/110120694/1fdc17f1-5b9b-41fd-bc98-4584f1c64e05)
+![write path](https://github.com/RudranshKi/SRAM/assets/110120694/d3b8a06e-ab44-4786-ac53-983930d22893)
 |:--:| 
 | *WRITE PATH* |
+
+Here we are trying to write 0V , so the node voltage is 0.3 so the inverter opposite to it has already swapped the values from 0 to 1.8V.
+
+Here the transistor , m5 is in saturation and m3 in linear according to (VSD = VSG - VT) eqn
+
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/d8718afc-2366-4b78-9f21-068d5cc97075)
+
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/7f39fa18-774a-418a-8398-7ce769a47d6e)
+
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/b17b9bf7-50f9-450c-a889-c6ce71778855)
+
 
 ##### READ
 
