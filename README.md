@@ -104,11 +104,25 @@ TG is used instead of simple NMOS or PMOS because if we use only NMOS then the n
 
 ## Sense amplifier
 
-![Differential amp](https://github.com/RudranshKi/SRAM/assets/110120694/ec97f349-a372-4f66-8044-7ad6d7dbbc1e)
+![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
 |:--:| 
 | *Current mirror* |
 
-The main goal of current mirror circuit is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected in 
+![Differential amplifier(1)](https://github.com/RudranshKi/SRAM/assets/110120694/56327d17-23a3-4339-b994-70ad850145dd)
+|:--:| 
+| *Sense Amplifier* |
+
+The main goal of first current mirror circuit (marked with green) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (marked with blue) is to mirror the current in the both nodes for BL and BLB.
+
+
+When BL and BLB is is precharged to 1.8V the node voltage at Vsense stabilizes at a certain node value, in our case around 0.9V. (We do this by changing the size of the transisotrs.)
+
+So, once the node value of BL or BLB changes the node voltage Vsense is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
+
+We then use two inverters back to back to amplify that difference , so for e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading the those, BL (pre charged to 1.8V) is going to go down to 0V but the current mirror circuit is going to sense that voltage dip in BL node and will try maintain the same current in the other node by decreasing the Vsense node voltage down from 0.9V , and this will be immediately reflected upon the first inverter which would have been sized so that it's trigger point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable 1.8V or 0V (in this case 1.8V).
+
+Then immediately the next inverter which also have a high gain will send the output to reflect the actual output (in our case 0V) immediately.
+
 
 ## Specifications 
 
