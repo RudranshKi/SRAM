@@ -8,6 +8,15 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 1.  [About](https://github.com/RudranshKi/SRAM/blob/main/README.md#about)
 2.  [Cells used](https://github.com/RudranshKi/SRAM/blob/main/README.md#Cells-Used)
+    1. [6T SRAM cell](https://github.com/RudranshKi/SRAM/edit/main/README.md#6t-sram-cell)
+        1. [Operations](https://github.com/RudranshKi/SRAM/edit/main/README.md#operation)
+           1. [Write](https://github.com/RudranshKi/SRAM/edit/main/README.md#write)
+           2. [Read](https://github.com/RudranshKi/SRAM/edit/main/README.md#read)
+           3. [Hold](https://github.com/RudranshKi/SRAM/edit/main/README.md#hold)
+    2. [Pre charge circuit](https://github.com/RudranshKi/SRAM/edit/main/README.md#pre-charge-circuit)
+    3. [Write driver](https://github.com/RudranshKi/SRAM/edit/main/README.md#write-driver)
+    4. [Row decoder](https://github.com/RudranshKi/SRAM/edit/main/README.md#row-decoder)
+    5. [Sense Amplifier](https://github.com/RudranshKi/SRAM/edit/main/README.md#sense-amplifier)
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
 4.  [Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
 5.  [Design testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
@@ -105,6 +114,10 @@ When WR signal is high (1.8V) , the TG acts as short circuit and conducts curren
 
 TG is used instead of simple NMOS or PMOS because if we use only NMOS then the node voltage BL or BLB will only be able to write (VGS- VT) which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write (VSG - VT) which is 0.67 or VT if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
 
+### Row Decoder
+
+
+
 ### Sense amplifier
 
 ![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
@@ -139,7 +152,6 @@ Current supply : 8 uA
 
 
 
-
 ## Design
 
 
@@ -155,6 +167,20 @@ Current supply : 8 uA
 |:--:| 
 | *Row Decoder* |
 
+![Write_driver_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/f2e60df5-dd9a-4b7f-94e6-681a4fa01a18)
+|:--:| 
+| *8 bit write driver* |
+
+![Senseamp_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/31d1e046-bba0-454d-b636-50f7e4da67ee)
+|:--:| 
+| *8 bit Sense amplifier* |
+
+![SRAM_16_byte](https://github.com/RudranshKi/SRAM/assets/110120694/a06e8f14-ef8c-4819-b0a4-8d09090c75ff)
+|:--:| 
+| *16 byte SRAM full schematic connection* |
+
 ## Design testbench
+
+
 ## Result analysis
 ## Conclusion
