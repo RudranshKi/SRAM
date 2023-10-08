@@ -7,11 +7,12 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 ## Table of contents        
 
 1.  [About](https://github.com/RudranshKi/SRAM/blob/main/README.md#about)
-2.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
-3.  [Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
-4.  [Design testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
-5.  [Result analysis](https://github.com/RudranshKi/SRAM/blob/main/README.md#result-analysis) 
-6.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion)
+2.  [Cells used](https://github.com/RudranshKi/SRAM/blob/main/README.md#Cells-Used)
+3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
+4.  [Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
+5.  [Design testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
+6.  [Result analysis](https://github.com/RudranshKi/SRAM/blob/main/README.md#result-analysis) 
+7.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion)
 
 
 
@@ -19,7 +20,9 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 The design is based on 180nm MOS technology and 6T SRAM design.
 
-## 6T SRAM cell
+## Cells Used
+
+### 6T SRAM cell
 ![6T SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/9f6e0d71-e67f-4fbc-b913-a254151d34c1)
 |:--:| 
 | *Sense amp (6T)* |
@@ -29,9 +32,9 @@ The design is based on 180nm MOS technology and 6T SRAM design.
 3. As long as supply voltage is on, they retain the memory
 4. To write we need to forcefully manipulate the node voltages of the inverter
 
-### Operation  
+#### Operation  
 
-#### WRITE
+##### WRITE
 
 Procedure for writing in 6T SRAM :
 
@@ -46,7 +49,7 @@ Procedure for writing in 6T SRAM :
 |:--:| 
 | *WRITE PATH* |
 
-#### READ
+##### READ
 
 
 Procedure for reading in 6T SRAM :
@@ -77,12 +80,12 @@ To find the width for transistors in read operation :
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/ddd826ea-1617-49f3-8710-7f31487aa6ef)
 
 
-### HOLD
+#### HOLD
 
 When the access transisotrs are off the data is hold onto the inverters of SRAM
 
 
-## Pre Charge Circuit
+### Pre Charge Circuit
 
 ![Precharge](https://github.com/RudranshKi/SRAM/assets/110120694/c6428b27-2a1f-46dc-bcf9-e6151838a6ae)
 |:--:| 
@@ -92,7 +95,7 @@ when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB'
 
 Equilizer equalizes both the BL and BLB caps' voltage to same voltage.
 
-## Write Driver
+### Write Driver
 
 ![WRITE_driver](https://github.com/RudranshKi/SRAM/assets/110120694/98c8b3e4-1c47-4b5b-99e0-87076ca4770a)
 |:--:| 
@@ -102,7 +105,7 @@ When WR signal is high (1.8V) , the TG acts as short circuit and conducts curren
 
 TG is used instead of simple NMOS or PMOS because if we use only NMOS then the node voltage BL or BLB will only be able to write (VGS- VT) which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write (VSG - VT) which is 0.67 or VT if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
 
-## Sense amplifier
+### Sense amplifier
 
 ![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
 |:--:| 
