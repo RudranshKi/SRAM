@@ -9,20 +9,20 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 ## Table of contents        
 
 1.  [About](https://github.com/RudranshKi/SRAM/blob/main/README.md#about)
-2.  [Cells used](https://github.com/RudranshKi/SRAM/blob/main/README.md#Cells-Used)
+2.  [SRAM Circuit](https://github.com/RudranshKi/SRAM/blob/main/README.md#Cells-Used)
     1. [6T SRAM cell](https://github.com/RudranshKi/SRAM#6t-sram-cell)
         - [Operations](https://github.com/RudranshKi/SRAM#operation)
            1. [Write](https://github.com/RudranshKi/SRAM#write)
            2. [Read](https://github.com/RudranshKi/SRAM#read)
            3. [Hold](https://github.com/RudranshKi/SRAM#hold)
-           4. [Transistor sizing](https://github.com/RudranshKi/SRAM#Transistor-sizing)
+        - [6T-SRAM Design](https://github.com/RudranshKi/SRAM#Transistor-sizing)
     2. [Pre charge circuit](https://github.com/RudranshKi/SRAM#pre-charge-circuit)
     3. [Write driver](https://github.com/RudranshKi/SRAM#write-driver)
     4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
     5. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
-4.  [Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
-5.  [Design testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
+4.  [Schematic Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
+5.  [Testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
 6.  [Result analysis](https://github.com/RudranshKi/SRAM/blob/main/README.md#result-analysis) 
 7.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion)
 
@@ -32,7 +32,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 The design is based on 180nm MOS technology and 6T SRAM design.
 
-## Cells Used
+## SRAM Circuit
 
 ### 6T SRAM cell
 
@@ -107,7 +107,7 @@ To find the width for transistors in read operation :
 
 When the access transistors are off the data is hold onto the inverters of SRAM
 
-#### Transistor sizing
+#### 6T-SRAM Design
 
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/0aa21064-c1f5-4c9c-852f-35a7b8975233)
 
@@ -156,7 +156,7 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 The main goal of first current mirror circuit (bottom nmos one) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (top pmos one) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
 
 
-When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Differential amplifier sizing](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing) for details on this)
+When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Sense amplifier sizing](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing) for details on this)
 
 So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
 
@@ -165,7 +165,7 @@ We then use two inverters back to back to amplify that difference , so for e.g- 
 Then immediately the next inverter which also have a high gain will send the output to reflect the actual output (in our case 0V) immediately.
 
 
-#### Differential amplifier (Sense amp) tranistor Sizing
+#### Sense amp Design
 
 For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (sizing setup(the green part))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
 
@@ -225,7 +225,7 @@ Inside the blocks :
 | *8 bit Sense amplifier* |
 
 
-## Design testbench
+## Testbench
 
 ![Testbench](https://github.com/RudranshKi/SRAM/assets/110120694/2014c61b-b766-463b-b216-d391da3261b5)
 |:--:| 
