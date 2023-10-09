@@ -1,7 +1,7 @@
 
 # 6T SRAM based on 180 nm technology
 
-SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM and hence used as cache meomry in processors. 
+SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM and hence used as cache memory in processors. 
 
 ![SRAM block diagram](https://github.com/RudranshKi/SRAM/assets/110120694/7dc3362b-c70c-4604-b0a6-7eccbf39492b)
 |:--:| 
@@ -16,6 +16,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
            1. [Write](https://github.com/RudranshKi/SRAM#write)
            2. [Read](https://github.com/RudranshKi/SRAM#read)
            3. [Hold](https://github.com/RudranshKi/SRAM#hold)
+           4. [Transistor sizing](https://github.com/RudranshKi/SRAM#Transistor-sizing)
     2. [Pre charge circuit](https://github.com/RudranshKi/SRAM#pre-charge-circuit)
     3. [Write driver](https://github.com/RudranshKi/SRAM#write-driver)
     4. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
@@ -50,7 +51,7 @@ The design is based on 180nm MOS technology and 6T SRAM design.
 
 Procedure for writing in 6T SRAM :
 
-    1. When precharge is on , the parasitic capacitors connected to BL and BLB's caps are charged to 1.8V.
+    1. When pre charge is on , the parasitic capacitors connected to BL and BLB are charged to 1.8V.
     2. The write signal latches the voltage sources to the BL and BLB.
     2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input.
     3. The input sources for data we provide tried to forcefully alter the voltage in the SRAM inverter.
@@ -76,7 +77,7 @@ Here the transistor , m5 is in saturation and m3 in linear according to (VSD = V
 
 Procedure for reading in 6T SRAM :
 
-    1. When precharge is on , the BL and BLB's caps are charged to 1.8V.
+    1. When pre charge is on , the BL and BLB's caps are charged to 1.8V.
     2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input.
     3. The parasitic capacitors connected to the BL and BLB start draining according to the node voltage of the SRAM's inverter nodes.
     4. The output is then extracted from BL and BLB.
@@ -104,7 +105,7 @@ To find the width for transistors in read operation :
 
 #### HOLD
 
-When the access transisotrs are off the data is hold onto the inverters of SRAM
+When the access transistors are off the data is hold onto the inverters of SRAM
 
 #### Transistor sizing
 
@@ -119,7 +120,7 @@ When the access transisotrs are off the data is hold onto the inverters of SRAM
 
 when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB's caps charge to 1.8V or VDD.
 
-Equilizer equalizes both the BL and BLB caps' voltage to same voltage.
+Equalizer equalizes both the BL and BLB caps' voltage to same voltage.
 
 ### Write Driver
 
@@ -144,7 +145,7 @@ TG is used instead of simple NMOS or PMOS because if we use only NMOS then the n
 The main goal of first current mirror circuit (marked with green) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (marked with blue) is to mirror the current in the both nodes for BL and BLB.
 
 
-When BL and BLB is is precharged to 1.8V the node voltage at Vsense stabilizes at a certain node value, in our case around 0.9V. (We do this by changing the size of the transisotrs.)
+When BL and BLB is is pre charged to 1.8V the node voltage at Vsense stabilizes at a certain node value, in our case around 0.9V. (We do this by changing the size of the transistors.)
 
 So, once the node value of BL or BLB changes the node voltage Vsense is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
 
@@ -195,7 +196,7 @@ Inside the blocks :
 
 ![Testbench](https://github.com/RudranshKi/SRAM/assets/110120694/2014c61b-b766-463b-b216-d391da3261b5)
 |:--:| 
-| *16byte SRAM testbenchr* |
+| *16byte SRAM testbench* |
 
 ![ADE_L_setup](https://github.com/RudranshKi/SRAM/assets/110120694/28315818-ae21-4090-b03b-511e78e9ca01)
 |:--:| 
