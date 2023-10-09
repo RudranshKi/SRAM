@@ -19,7 +19,8 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
            4. [Transistor sizing](https://github.com/RudranshKi/SRAM#Transistor-sizing)
     2. [Pre charge circuit](https://github.com/RudranshKi/SRAM#pre-charge-circuit)
     3. [Write driver](https://github.com/RudranshKi/SRAM#write-driver)
-    4. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
+    4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
+    5. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
 4.  [Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
 5.  [Design testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
@@ -140,7 +141,7 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 |:--:| 
 | *Sample 2x4 decoder* |
 
-**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder]()**
+**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder](https://github.com/RudranshKi/SRAM/tree/main#)**
 
 ### Sense amplifier
 
