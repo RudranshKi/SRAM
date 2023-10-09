@@ -237,10 +237,21 @@ Inside the blocks :
 
 
 ## Result analysis
-
+We tested SRAM memory array for different process and temperatures and below is the result.
 ![Process corner](https://github.com/RudranshKi/SRAM/assets/110120694/73fc6827-fdd4-4e44-8dff-16a58ecff644)
 |:--:| 
 | *Process Corner test analysis* |
+
+
+
+**Read Delay** - Delay between the output and *Ctrl* signal's falling edge. (note : *Higher the better*)
+
+**Write Delay** - Delay between the write signal's rising edge and falling or rising edge of the node voltage in SRAM cell. (note : *Lower the better*)
+
+**Pre Charge Delay** - Time it takes for BL and BLB caps to charge upto 5% of VDD once pre charge signal is low (0V in our case). (note : *Lower the better*)
+
+*NOTE: Nominal conditions : temperature - 27&deg;C , mos.scs - tm*
+
 
 ![SRAM_working](https://github.com/RudranshKi/SRAM/assets/110120694/7b432393-22c6-406b-ade3-d529450b03a3)
 |:--:| 
