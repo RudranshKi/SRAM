@@ -140,9 +140,8 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 ![sample 2x4 decoder](https://github.com/RudranshKi/SRAM/assets/110120694/ece61c03-fc1b-491e-9bcf-2a244ef0916c)
 |:--:| 
 | *Sample 2x4 decoder* |
-<a name="rowDecoder"></a>
-### 4x16/
-**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder]()**
+
+**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder]((https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd))**
 
 ### Sense amplifier
 
@@ -191,9 +190,9 @@ Inside the blocks :
 |:--:| 
 | *8 bit Pre Charge Circuit* |
 
-###### .
 
-![Row Decoder](https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd)(#rowDecoder)
+
+![Row Decoder](https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd)
 |:--:| 
 | *Row Decoder* |
 
