@@ -156,7 +156,7 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 The main goal of first current mirror circuit (bottom nmos one) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (top pmos one) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
 
 
-When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. ([refer to current mirror sizing for details on this](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing))
+When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Differential amplifier sizing]((https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing)) for details on this)
 
 So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
 
