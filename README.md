@@ -132,6 +132,16 @@ When WR signal is high (1.8V) , the TG acts as short circuit and conducts curren
 
 TG is used instead of simple NMOS or PMOS because if we use only NMOS then the node voltage BL or BLB will only be able to write (VGS- VT) which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write (VSG - VT) which is 0.67 or VT if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
 
+### Row decoder
+
+To address 16 byte memory in our case , we need a 4x16 decoder.
+
+![sample 2x4 decoder](https://github.com/RudranshKi/SRAM/assets/110120694/ece61c03-fc1b-491e-9bcf-2a244ef0916c)
+|:--:| 
+| *Sample 2x4 decoder* |
+
+**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder]()**
+
 ### Sense amplifier
 
 ![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
@@ -179,6 +189,7 @@ Inside the blocks :
 |:--:| 
 | *8 bit Pre Charge Circuit* |
 
+###### .
 ![Row Decoder](https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd)
 |:--:| 
 | *Row Decoder* |
