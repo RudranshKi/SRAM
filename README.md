@@ -141,7 +141,7 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 |:--:| 
 | *Sample 2x4 decoder* |
 
-**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder](#row-decoder)**
+**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder](https://github.com/RudranshKi/SRAM/blob/main/README.md#row-decoder-1)**
 
 ### Sense amplifier
 
