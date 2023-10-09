@@ -1,4 +1,4 @@
-# 6T SRAM based on 180 nm technology
+# Design and Development of 16-byte SRAM circuit using 180nm CMOS technology
 
 SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM and hence used as cache memory in processors. 
 
