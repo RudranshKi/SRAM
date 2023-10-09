@@ -1,4 +1,4 @@
- in a readme file without using a header
+  in a readme file without using a header
 # 6T SRAM based on 180 nm technology
 
 SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM and hence used as cache memory in processors. 
@@ -179,28 +179,30 @@ Current supply : 8 uA
 
 ## Design
 
-
+#### 16-byte SRAM
 ![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
 |:--:| 
 | *16 byte SRAM* |
 
 Inside the blocks :
 
+#### 8-bit pre charge circuit
 ![8 bit Pre Charge Circuit](https://github.com/RudranshKi/SRAM/assets/110120694/233d80fe-fe6e-4efb-8341-e024fb755695)
 |:--:| 
 | *8 bit Pre Charge Circuit* |
 
 
-
-![Row Decoder](https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd)(# row-decoder)
-
+#### Row decoder
+![Row Decoder](https://github.com/RudranshKi/SRAM/assets/110120694/9523594c-0703-4855-a086-54a1b1ffcfbd)
 |:--:| 
 | *Row Decoder* |
 
+#### 8-bit write Driver
 ![Write_driver_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/f2e60df5-dd9a-4b7f-94e6-681a4fa01a18)
 |:--:| 
 | *8 bit write driver* |
 
+#### 8-bit sense amplifier
 ![Senseamp_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/31d1e046-bba0-454d-b636-50f7e4da67ee)
 |:--:| 
 | *8 bit Sense amplifier* |
