@@ -143,33 +143,37 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 **Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder](https://github.com/RudranshKi/SRAM/blob/main/README.md#row-decoder-1)**
 
 ### Sense amplifier
-
+<!---
 ![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
 |:--:| 
 | *Current mirror* |
+--->
 
 ![Differential amplifier(1)](https://github.com/RudranshKi/SRAM/assets/110120694/56327d17-23a3-4339-b994-70ad850145dd)
 |:--:| 
 | *Sense Amplifier* |
 
-The main goal of first current mirror circuit (marked with green) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (marked with blue) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
+The main goal of first current mirror circuit (bottom nmos one) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (top pmos one) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
 
 
-When BL and BLB is is pre charged to 1.8V the node voltage at Vsense stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to current mirror sizing for details on this)
+When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to current mirror sizing for details on this)
 
-So, once the node value of BL or BLB changes the node voltage Vsense is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
+So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
 
-We then use two inverters back to back to amplify that difference , so for e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading those, BL (pre charged to 1.8V) is going to go down to 0V but the current mirror circuit is going to sense that voltage dip in BL node and will try maintain the same current in the other node by decreasing the Vsense node voltage down from 0.9V , and this will be immediately reflected upon the first inverter which would have been sized such that it's trigger point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable 1.8V or 0V (in this case 1.8V).
+We then use two inverters back to back to amplify that difference , so for e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading those, BL (pre charged to 1.8V) is going to go down to 0V but the current mirror circuit is going to sense that voltage dip in BL node and will try maintain the same current in the other node by decreasing the ***Vsense*** node voltage down from 0.9V , and this will be immediately reflected upon the first inverter which would have been sized such that it's trip point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable 1.8V or 0V (in this case 1.8V).
 
 Then immediately the next inverter which also have a high gain will send the output to reflect the actual output (in our case 0V) immediately.
 
 
-#### Current Mirror Sizing
+#### Differential amplifier (Sense amp) tranistor Sizing
 
-For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig ([transistor sizing setup]())). Then after setting a  **Gm / ID** ratio, we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
+For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (sizing setup(the green part))). Then after setting a  **Gm / ID** ratio, we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
 
 (*We are using Gm/ID to maintain a good saturation region*)
 
+![sizing setup](https://github.com/RudranshKi/SRAM/assets/110120694/54ea75ef-42e6-4e32-b57e-4ee73626c469)
+|:--:| 
+| *Sizing setup* |
 
 Since ***Vnode*** is dawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for pmos) and connect BL an BLB transistors to it. The NMOSes connecting the PMOS current mirror circuit to NMOS current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that output - 1.8V, below that output - 0v).
 
