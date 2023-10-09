@@ -167,7 +167,7 @@ Then immediately the next inverter which also have a high gain will send the out
 
 #### Differential amplifier (Sense amp) tranistor Sizing
 
-For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (sizing setup(the green part))). Then after setting a  **Gm / ID** ratio, we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
+For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (sizing setup(the green part))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
 
 (*We are using Gm/ID to maintain a good saturation region*)
 
