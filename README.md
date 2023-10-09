@@ -179,14 +179,14 @@ Current supply : 8 uA
 
 ## Design
 
-#### 16-byte SRAM
+#### RAM
 ![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
 |:--:| 
 | *16 byte SRAM* |
 
 Inside the blocks :
 
-#### 8-bit pre charge circuit
+#### Pre charge circuit
 ![8 bit Pre Charge Circuit](https://github.com/RudranshKi/SRAM/assets/110120694/233d80fe-fe6e-4efb-8341-e024fb755695)
 |:--:| 
 | *8 bit Pre Charge Circuit* |
@@ -197,12 +197,12 @@ Inside the blocks :
 |:--:| 
 | *Row Decoder* |
 
-#### 8-bit write Driver
+#### Write Driver
 ![Write_driver_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/f2e60df5-dd9a-4b7f-94e6-681a4fa01a18)
 |:--:| 
 | *8 bit write driver* |
 
-#### 8-bit sense amplifier
+#### Sense amplifier
 ![Senseamp_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/31d1e046-bba0-454d-b636-50f7e4da67ee)
 |:--:| 
 | *8 bit Sense amplifier* |
