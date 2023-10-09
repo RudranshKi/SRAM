@@ -34,7 +34,8 @@ The design is based on 180nm MOS technology and 6T SRAM design.
 ## Cells Used
 
 ### 6T SRAM cell
-![6T SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/9f6e0d71-e67f-4fbc-b913-a254151d34c1)
+
+![SRAM 6T](https://github.com/RudranshKi/SRAM/assets/110120694/b99eba4a-1d20-49a1-926a-c6cf94a31b16)
 |:--:| 
 | *Sense amp (6T)* |
 
@@ -56,7 +57,7 @@ Procedure for writing in 6T SRAM :
     4. For that we need to find the appropriate sizing for the transistors involved in the data writing process.
 
 
-![write path](https://github.com/RudranshKi/SRAM/assets/110120694/d3b8a06e-ab44-4786-ac53-983930d22893)
+![Write path(1)](https://github.com/RudranshKi/SRAM/assets/110120694/d9ca614f-ad84-4c31-abba-bcc33cb56e0d)
 |:--:| 
 | *WRITE PATH* |
 
@@ -104,6 +105,10 @@ To find the width for transistors in read operation :
 #### HOLD
 
 When the access transisotrs are off the data is hold onto the inverters of SRAM
+
+#### Transistor sizing
+
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/0aa21064-c1f5-4c9c-852f-35a7b8975233)
 
 
 ### Pre Charge Circuit
