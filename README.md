@@ -138,7 +138,7 @@ To drive the BL and BLB's parasitic capacitance, we need to chain drive it like 
 ### Row decoder
 
 To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on access transistors in the SRAM coloumn array.
-
+The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctrl*** signal is low , it switches the output of decoder to 0V but when it is on , it allows the normal functioning of the decoder to happen.
 ![Row decoder](https://github.com/RudranshKi/SRAM/assets/110120694/02dcecdf-c576-459d-adcf-de4c7454270d)
 |:--:| 
 | *4x16 Row Decoder* |
@@ -217,7 +217,12 @@ Inside the blocks :
 #### Transistor gate chain
 ![TG Chain](https://github.com/RudranshKi/SRAM/assets/110120694/f2e60df5-dd9a-4b7f-94e6-681a4fa01a18)
 |:--:| 
-| *8 bit write driver* |
+| *8 bit write data (TG chain)* |
+
+#### Write Driver
+![Screenshot from 2023-10-10 10-52-38](https://github.com/RudranshKi/SRAM/assets/110120694/a2c0cd55-1cb1-4d1e-96fa-41b36ed81fa6)
+|:--:| 
+| *8 bit Write Driver* |
 
 #### Sense amplifier
 ![Senseamp_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/31d1e046-bba0-454d-b636-50f7e4da67ee)
