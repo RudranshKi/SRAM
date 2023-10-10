@@ -36,7 +36,8 @@ The design is based on 180nm MOS technology and 6T SRAM design.
 
 ### 6T SRAM cell
 
-![SRAM 6T](https://github.com/RudranshKi/SRAM/assets/110120694/b99eba4a-1d20-49a1-926a-c6cf94a31b16)
+
+![6T sram(2)](https://github.com/RudranshKi/SRAM/assets/110120694/89d462e3-e65b-43b0-9cc5-0f13c9c6443c)
 |:--:| 
 | *Sense amp (6T)* |
 
@@ -58,7 +59,7 @@ Procedure for writing in 6T SRAM :
     4. For that we need to find the appropriate sizing for the transistors involved in the data writing process.
 
 
-![Write path(1)](https://github.com/RudranshKi/SRAM/assets/110120694/d9ca614f-ad84-4c31-abba-bcc33cb56e0d)
+![Write path(2)](https://github.com/RudranshKi/SRAM/assets/110120694/f6b08e97-d7b7-4e97-850e-75970814fb40)
 |:--:| 
 | *WRITE PATH* |
 
@@ -83,7 +84,7 @@ Procedure for reading in 6T SRAM :
     4. The output is then extracted from BL and BLB.
     
 
-![read_path](https://github.com/RudranshKi/SRAM/assets/110120694/8093b07b-0e1d-41c2-a90e-96a548188ebb)
+![Read path](https://github.com/RudranshKi/SRAM/assets/110120694/1874556d-4508-41e1-ae91-1c91b54084a2)
 |:--:| 
 | *READ PATH* |
 
@@ -105,26 +106,26 @@ To find the width for transistors in read operation :
 
 #### HOLD
 
-When the access transistors are off the data is hold onto the inverters of SRAM
+When the access transistors are off the data is hold onto the inverters of SRAM as long sufficent supply voltage is present.
 
 #### 6T-SRAM Design
 
-![image](https://github.com/RudranshKi/SRAM/assets/110120694/0aa21064-c1f5-4c9c-852f-35a7b8975233)
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/818d5fa0-e721-4c7e-8397-6683c371c1ce)
 
 
 ### Pre Charge Circuit
 
-![Precharge](https://github.com/RudranshKi/SRAM/assets/110120694/c6428b27-2a1f-46dc-bcf9-e6151838a6ae)
+![Precharge](https://github.com/RudranshKi/SRAM/assets/110120694/2aaccf0c-48a4-4f14-9a13-1747e99df3b6)
 |:--:| 
 | *Pre charge circuit* |
 
-when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB's caps charge to 1.8V or VDD.
+when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB's caps charge to 1.8V or VDD. The sizes of PMOS transistors decide how fast BL and BLB can charge up. It is essential to maintain good performance to area ratio while sizing it.
 
 Equalizer equalizes both the BL and BLB caps' voltage to same voltage.
 
 ### Write Driver
 
-![WRITE_driver](https://github.com/RudranshKi/SRAM/assets/110120694/98c8b3e4-1c47-4b5b-99e0-87076ca4770a)
+![Write driver](https://github.com/RudranshKi/SRAM/assets/110120694/9dcd9f7b-f113-4900-b639-bec40614e88c)
 |:--:| 
 | *Write driver using transmission gate* |
 
@@ -132,15 +133,17 @@ When WR signal is high (1.8V) , the TG acts as short circuit and conducts curren
 
 TG is used instead of simple NMOS or PMOS because if we use only NMOS then the node voltage BL or BLB will only be able to write (VGS- VT) which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write (VSG - VT) which is 0.67 or VT if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
 
+To drive the BL and BLB's parasitic capacitance, we need to chain drive it like domino effect. Where to drive higher cap we need a relatively smaller , and for driving that smaller cap we need even more relatively smaller cap. This generally follows roughly 2:1 ratio where a capacitor can drive another cap which is almost 2 times the size of it.
+
 ### Row decoder
 
-To address 16 byte memory in our case , we need a 4x16 decoder.
+To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on access transistors in the SRAM coloumn array.
 
-![sample 2x4 decoder](https://github.com/RudranshKi/SRAM/assets/110120694/ece61c03-fc1b-491e-9bcf-2a244ef0916c)
+![Row decoder](https://github.com/RudranshKi/SRAM/assets/110120694/02dcecdf-c576-459d-adcf-de4c7454270d)
 |:--:| 
-| *Sample 2x4 decoder* |
+| *4x16 Row Decoder* |
 
-**Note : we aren't using 2x4 decoder in our case since we are going to address 16 bytes so 16 coloumns of memory registers, so we will be using a [4x16 deocder](https://github.com/RudranshKi/SRAM/blob/main/README.md#row-decoder-1)**
+
 
 ### Sense amplifier
 <!---
@@ -149,11 +152,11 @@ To address 16 byte memory in our case , we need a 4x16 decoder.
 | *Current mirror* |
 --->
 
-![Differential amplifier(1)](https://github.com/RudranshKi/SRAM/assets/110120694/56327d17-23a3-4339-b994-70ad850145dd)
+![Sense Amplifier](https://github.com/RudranshKi/SRAM/assets/110120694/82eb7710-86d3-4c27-9763-1824ddca2bf2)
 |:--:| 
 | *Sense Amplifier* |
 
-The main goal of first current mirror circuit (bottom nmos one) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (top pmos one) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
+The main goal of first current mirror circuit (m5 and m0) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (m3 and m4) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
 
 
 When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Sense amplifier sizing](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing) for details on this)
@@ -165,21 +168,21 @@ We then use two inverters back to back to amplify that difference , so for e.g- 
 Then immediately the next inverter which also have a high gain will send the output to reflect the actual output (in our case 0V) immediately.
 
 
-#### Sense amp Design
+#### Sense amplifier Design
 
-For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (sizing setup(the green part))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
+For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (Sizing setup(only m6))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
 
 (*We are using Gm/ID to maintain a good saturation region*)
 
-![sizing setup](https://github.com/RudranshKi/SRAM/assets/110120694/54ea75ef-42e6-4e32-b57e-4ee73626c469)
+![Current mirror(1)](https://github.com/RudranshKi/SRAM/assets/110120694/8678d862-4cc2-4aac-9bc0-5dc3c463c838)
 |:--:| 
 | *Sizing setup* |
 
-Since ***Vnode*** is dawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for pmos) and connect BL an BLB transistors to it. The NMOSes connecting the PMOS current mirror circuit to NMOS current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that output - 1.8V, below that output - 0v).
+Since ***Vnode*** is dawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for PMOS) and connect BL an BLB transistors to it. The NMOSes (m1 and m2) connecting the PMOS (m3 and m4) current mirror circuit to NMOS (m5 and m0) current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that trip point - 1.8V, below that trip point - 0v).
 
 
 
-Inverter 1 is sized so that it's trip point is around the same value as that of ***Vsense***. 
+Inverter 1 is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
 
 
 ## Specifications 
@@ -189,9 +192,6 @@ Supply Voltage : 1.8V
 Maximum operation frequency : 65 MHz
 
 Memory : 16 byte
-
-Current supply : 8 uA
-
 
 
 ## Design
@@ -214,8 +214,8 @@ Inside the blocks :
 |:--:| 
 | *Row Decoder* |
 
-#### Write Driver
-![Write_driver_8bit](https://github.com/RudranshKi/SRAM/assets/110120694/f2e60df5-dd9a-4b7f-94e6-681a4fa01a18)
+#### Transistor gate chain
+![TG Chain](https://github.com/RudranshKi/SRAM/assets/110120694/f2e60df5-dd9a-4b7f-94e6-681a4fa01a18)
 |:--:| 
 | *8 bit write driver* |
 
