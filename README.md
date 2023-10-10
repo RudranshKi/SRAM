@@ -1,8 +1,8 @@
 # Design and Development of 16-byte SRAM Circuit using 180nm CMOS Technology
 
-SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM and hence used as cache memory in processors. 
+SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM (Dynamic RAM) which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM and hence used as cache memory in processors. 
 
-![SRAM block diagram(1)](https://github.com/RudranshKi/SRAM/assets/110120694/934f64a3-1412-482b-a371-fa4ef5b33ba5)
+![SRAM-BlockDiagram](https://github.com/RudranshKi/SRAM/assets/110120694/f8760390-6f61-42c9-aa3c-b663c23855ca)
 |:--:| 
 | *SRAM Block diagram* |
 
@@ -29,15 +29,16 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 
 ## Introduction    
+16-byte SRAM array based on 6T design of SRAM. It reads and write 8 bits at once and the column is selected by a decoder which will decode the input address. While writing data onto SRAM cell, we provide a external source to forcefully alter the data stored. The data is drived by a buffer chain to effeciently write the data onto SRAM. And for reading we let the pre charged Bit Line (BL) or Bit Line Bar (BLB) value to drain to the stored value. While reading the sense amplifier senses the changes in BL and BLB, and amplifies the difference so as to provide the output fast without waiting for one of them to completely drain.
 
-The design is based on 180nm MOS technology and 6T SRAM design.
+It is generally used as cache memory for it's ability to retain data for theoritically infinite time as long as supply is on and can be used for low powered IOT devices where speed and power consumption is a priority.
 
 ## SRAM Circuit
 
 ### 6T SRAM cell
 
 
-![6T sram(2)](https://github.com/RudranshKi/SRAM/assets/110120694/89d462e3-e65b-43b0-9cc5-0f13c9c6443c)
+![6T sram](https://github.com/RudranshKi/SRAM/assets/110120694/89d462e3-e65b-43b0-9cc5-0f13c9c6443c)
 |:--:| 
 | *Sense amp (6T)* |
 
@@ -52,10 +53,10 @@ The design is based on 180nm MOS technology and 6T SRAM design.
 
 Procedure for writing in 6T SRAM :
 
-    1. When pre charge is on , the parasitic capacitors connected to BL and BLB are charged to 1.8V.
+    1. When pre charge is on , BL and BLB are charged to 1.8V.
     2. The write signal latches the voltage sources to the BL and BLB.
-    2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input.
-    3. The input sources for data we provide tried to forcefully alter the voltage in the SRAM inverter.
+    2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input and similarly for the BLB.
+    3. The input sources for data we provide tries to forcefully alter the voltage in the SRAM inverter.
     4. For that we need to find the appropriate sizing for the transistors involved in the data writing process.
 
 
@@ -63,9 +64,9 @@ Procedure for writing in 6T SRAM :
 |:--:| 
 | *WRITE PATH* |
 
-Here we are trying to write 0V , so the node voltage is 0.3 so the inverter opposite to it has already swapped the values from 0 to 1.8V.
+Here we are trying to write 0V , so the node voltage is 0.3 and the inverter opposite to it has already swapped the values from 0 to 1.8V.
 
-Here the transistor , m5 is in saturation and m3 in linear according to (VSD = VSG - VT) eqn
+Here the transistor , m5 is in saturation and m3 in linear according to **(VSD = VSG - VT)** eqn
 
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/d8718afc-2366-4b78-9f21-068d5cc97075)
 
@@ -78,10 +79,10 @@ Here the transistor , m5 is in saturation and m3 in linear according to (VSD = V
 
 Procedure for reading in 6T SRAM :
 
-    1. When pre charge is on , the BL and BLB's caps are charged to 1.8V.
+    1. When pre charge is on , the BL and BLB are charged to 1.8V.
     2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input.
-    3. The parasitic capacitors connected to the BL and BLB start draining according to the node voltage of the SRAM's inverter nodes.
-    4. The output is then extracted from BL and BLB.
+    3. Then BL and BLB start draining through the m1 node (if you're reading 0V else it will stay at pre charged value since acess transistor will never turn on).
+    4. The output is then extracted from BL and BLB after the voltages settle down.
     
 
 ![Read path](https://github.com/RudranshKi/SRAM/assets/110120694/1874556d-4508-41e1-ae91-1c91b54084a2)
@@ -123,6 +124,8 @@ when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB'
 
 Equalizer equalizes both the BL and BLB caps' voltage to same voltage.
 
+In our case : PMOS - W = 1u, L = 180 nm
+
 ### Write Driver
 
 ![Write driver](https://github.com/RudranshKi/SRAM/assets/110120694/9dcd9f7b-f113-4900-b639-bec40614e88c)
@@ -133,8 +136,13 @@ When WR signal is high (1.8V) , the TG acts as short circuit and conducts curren
 
 TG is used instead of simple NMOS or PMOS because if we use only NMOS then the node voltage BL or BLB will only be able to write (VGS- VT) which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write (VSG - VT) which is 0.67 or VT if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
 
-To drive the BL and BLB's parasitic capacitance, we need to chain drive it like domino effect. Where to drive higher cap we need a relatively smaller , and for driving that smaller cap we need even more relatively smaller cap. This generally follows roughly 2:1 ratio where a capacitor can drive another cap which is almost 2 times the size of it.
+Since, SRAM array has 16 SRAMs which will have some parasitic capacitance. To drive a huge capacitance we need short rise and fall time to decrease power loss and increase speed. For that we need to drive it efficently we will need increase the strength of the inverter connected to it. Since increasing the strength of the inverter we will need to increase the size of NMOS and PMOS in it but that will also consequently increase parasitic cap. So we have to create a ***Buffer chain*** with a stage ratio of 4:1. 
 
+
+In ***Buffer chain*** we essentially gradually reduce the size of transistors needed to drive a capacitance by successively driving the prior cap by smaller cap. And this ratio is usually 4:1 which gives a good proportion for area to performance.
+
+
+In our case the parasitic cap isn't huge so going from Inv 2X to Inv 1x for buffer chain is enough.
 ### Row decoder
 
 To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on access transistors in the SRAM coloumn array.
@@ -183,6 +191,30 @@ Since ***Vnode*** is dawing the same current from the given current source we us
 
 
 Inverter 1 is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
+
+**Differential Amplifier transistor sizing**
+**----------------------------------------**
+
+|  Transistor   |     Type      |     Width     |     Length    |
+| ------------- | ------------- | ------------- | ------------- |
+|      m5       |    NMOS  |    350 nm  |    2 &micro;m  |
+|      m0       |    NMOS  |    350 nm  |    2 &micro;m  |
+|      m1       |    NMOS  |    300 nm  |   1.5 &micro;m  |
+|      m2       |    NMOS  |    300 nm  |   1.5 &micro;m  |
+|      m3       |    PMOS  |    600 nm  |   1.7 &micro;m  |
+|      m4       |    PMOS  |    600 nm  |   1.7 &micro;m  |
+
+
+
+**Inverter transistor sizing**
+**----------------------------------------**
+
+|  Inverter   |     Type      |     Width     |     Length    |
+| ------------- | ------------- | ------------- | ------------- |
+|      Inv 1       |    PMOS  |    2.045 &micro;m  |    180 nm  |
+|      Inv 1       |    NMOS  |    500 nm  |    180 nm  |
+|      Inv 2       |    PMOS  |    6 &micro;m  |    180 nm  |
+|      Inv 2       |    NMOS  |    500 nm  |    180 nm  |
 
 
 ## Specifications 
@@ -255,8 +287,8 @@ We tested SRAM memory array for different process and temperatures and below is 
 
 **Pre Charge Delay** - Time it takes for BL and BLB caps to charge upto 5% of VDD once pre charge signal is low (0V in our case). (note : *Lower the better*)
 
-*NOTE: Nominal conditions : temperature - 27&deg;C , mos.scs - tm*
 
+<ins>**SRAM Read/Write Operation output in nominal conditions**</ins>
 
 ![SRAM_working](https://github.com/RudranshKi/SRAM/assets/110120694/7b432393-22c6-406b-ade3-d529450b03a3)
 |:--:| 
