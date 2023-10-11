@@ -20,6 +20,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
     3. [Write driver](https://github.com/RudranshKi/SRAM#write-driver)
     4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
     5. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
+         - [Sense Amplifier Design](https://github.com/RudranshKi/SRAM#sense-amplifier-design)
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
 4.  [Schematic Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
 5.  [Testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
@@ -28,14 +29,14 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 
 
-## Introduction    
+## <ins>Introduction</ins>
 16-byte SRAM array based on 6T design of SRAM. It reads and write 8 bits at once and the column is selected by a decoder which will decode the input address. While writing data onto SRAM cell, we provide a external source to forcefully alter the data stored. The data is drived by a buffer chain to effeciently write the data onto SRAM. And for reading we let the pre charged Bit Line (BL) or Bit Line Bar (BLB) value to drain to the stored value. While reading the sense amplifier senses the changes in BL and BLB, and amplifies the difference so as to provide the output fast without waiting for one of them to completely drain.
 
 It is generally used as cache memory for it's ability to retain data for theoritically infinite time as long as supply is on and can be used for low powered IOT devices where speed and power consumption is a priority.
 
-## SRAM Circuit
+## <ins>SRAM Circuit</ins>
 
-### 6T SRAM cell
+### <ins>6T SRAM cell</ins>
 
 
 ![6T sram](https://github.com/RudranshKi/SRAM/assets/110120694/89d462e3-e65b-43b0-9cc5-0f13c9c6443c)
@@ -47,9 +48,9 @@ It is generally used as cache memory for it's ability to retain data for theorit
 3. As long as supply voltage is on, they retain the memory
 4. To write we need to forcefully manipulate the node voltages of the inverter
 
-#### Operation  
+#### <ins>Operation  </ins>
 
-##### WRITE
+##### <ins>WRITE</ins>
 
 Procedure for writing in 6T SRAM :
 
@@ -75,7 +76,7 @@ Here the transistor , m5 is in saturation and m3 in linear according to **(VSD =
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/b17b9bf7-50f9-450c-a889-c6ce71778855)
 
 
-##### READ
+##### <ins>READ</ins>
 
 Procedure for reading in 6T SRAM :
 
@@ -105,16 +106,27 @@ To find the width for transistors in read operation :
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/ddd826ea-1617-49f3-8710-7f31487aa6ef)
 
 
-#### HOLD
+##### <ins>HOLD</ins>
 
 When the access transistors are off the data is hold onto the inverters of SRAM as long sufficent supply voltage is present.
 
-#### 6T-SRAM Design
+#### <ins>6T-SRAM Design</ins>
 
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/818d5fa0-e721-4c7e-8397-6683c371c1ce)
 
 
-### Pre Charge Circuit
+**Final transistor size,**
+|  Transistor   |     Type      |     Width     |     Length    |
+| ------------- | ------------- | ------------- | ------------- |
+|      m1       |    NMOS  |    220 nm  |   180 nm  |
+|      m2       |    NMOS  |    220 nm  |   180 nm  |
+|      m3       |    NMOS  |    220 nm  |   180 nm  |
+|      m4       |    NMOS  |    220 nm  |   180 nm  |
+|      m5       |    PMOS  |    550 nm  |   180 nm  |
+|      m6       |    PMOS  |    550 nm  |   180 nm  |
+
+
+### <ins>Pre Charge Circuit</ins>
 
 ![Precharge](https://github.com/RudranshKi/SRAM/assets/110120694/2aaccf0c-48a4-4f14-9a13-1747e99df3b6)
 |:--:| 
@@ -126,7 +138,7 @@ Equalizer equalizes both the BL and BLB caps' voltage to same voltage.
 
 In our case : PMOS - W = 1u, L = 180 nm
 
-### Write Driver
+### <ins>Write Driver</ins>
 
 ![Write driver](https://github.com/RudranshKi/SRAM/assets/110120694/9dcd9f7b-f113-4900-b639-bec40614e88c)
 |:--:| 
@@ -143,7 +155,7 @@ In ***Buffer chain*** we essentially gradually reduce the size of transistors ne
 
 
 In our case the parasitic cap isn't huge so going from Inv 2X to Inv 1x for buffer chain is enough.
-### Row decoder
+### <ins>Row decoder</ins>
 
 To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on access transistors in the SRAM coloumn array.
 The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctrl*** signal is low , it switches the output of decoder to 0V but when it is on , it allows the normal functioning of the decoder to happen.
@@ -153,7 +165,7 @@ The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctr
 
 
 
-### Sense amplifier
+### <ins>Sense amplifier</ins>
 <!---
 ![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
 |:--:| 
@@ -176,7 +188,7 @@ We then use two inverters back to back to amplify that difference , so for e.g- 
 Then immediately the next inverter which also have a high gain will send the output to reflect the actual output (in our case 0V) immediately.
 
 
-#### Sense amplifier Design
+#### <ins>Sense amplifier Design</ins>
 
 For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (Sizing setup(only m6))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
 
@@ -193,6 +205,7 @@ Since ***Vnode*** is dawing the same current from the given current source we us
 Inverter 1 is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
 
 **Differential Amplifier transistor sizing**
+
 **----------------------------------------**
 
 |  Transistor   |     Type      |     Width     |     Length    |
@@ -207,6 +220,7 @@ Inverter 1 is sized so that it's trip point is around the same value as that of 
 
 
 **Inverter transistor sizing**
+
 **----------------------------------------**
 
 |  Inverter   |     Type      |     Width     |     Length    |
@@ -217,7 +231,7 @@ Inverter 1 is sized so that it's trip point is around the same value as that of 
 |      Inv 2       |    NMOS  |    500 nm  |    180 nm  |
 
 
-## Specifications 
+## <ins>Specifications</ins> 
 
 Supply Voltage : 1.8V
 
@@ -226,7 +240,7 @@ Maximum operation frequency : 65 MHz
 Memory : 16 byte
 
 
-## Design
+## <ins>Design</ins>
 
 #### SRAM
 ![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
@@ -262,7 +276,7 @@ Inside the blocks :
 | *8 bit Sense amplifier* |
 
 
-## Testbench
+## <ins>Testbench</ins>
 
 ![Testbench](https://github.com/RudranshKi/SRAM/assets/110120694/2014c61b-b766-463b-b216-d391da3261b5)
 |:--:| 
@@ -275,27 +289,36 @@ Inside the blocks :
 
 
 
-## Terminology for delays
+## <ins>Delays in SRAM</ins>
 
 ![Read_delay_1to0](https://github.com/RudranshKi/SRAM/assets/110120694/a88c925f-cab3-4882-b0b7-9f82602f043c)
+|:--:| 
+| *Read (1->0) Delay* |
 
 **Read (1 -> 0) Delay** - Delay between the falling edge of the output ( from 1.8V to 0V ) and *Ctrl* signal's falling edge. (note : *Lower the better*)
 
 ![Read_delay_0to1](https://github.com/RudranshKi/SRAM/assets/110120694/c2706e74-d35d-42a2-bc29-b3e17082e012)
+|:--:| 
+| *Read (0->1) Delay* |
 
 **Read (0 -> 1) Delay** - Delay between the rising edge of the output ( from 0V to 1.8V ) and *Ctrl* signal's falling edge. (note : *Lower the better*)
 
 ![Write delay](https://github.com/RudranshKi/SRAM/assets/110120694/7229d809-d66f-4f43-be5e-f257cf660012)
+|:--:| 
+| *Write Delay* |
 
 **Write Delay** - Delay between the write signal's rising edge and falling or rising edge of the node voltage in SRAM cell. (note : *Lower the better*)
 
 ![Precharge delay](https://github.com/RudranshKi/SRAM/assets/110120694/d0b0f239-4fb0-4e2e-af2d-0d122b0f331a)
+|:--:| 
+| *Pre Charge Delay* |
 
 **Pre Charge Delay** - Time it takes for BL and BLB caps to charge upto 5% of VDD once pre charge signal is low (0V in our case). (note : *Lower the better*)
 
 
 
-## Operating Frequency Measurement
+## <ins>Operating Frequency Measurement</ins>
+
 We tested SRAM memory array for different process and temperatures and below is the result.
 
 ![Process_corner_tp_11n](https://github.com/RudranshKi/SRAM/assets/110120694/cce5c8f1-6a87-466e-b2c9-06789c5444c7)
@@ -332,7 +355,7 @@ In our case the final Precharge signal OFF time is around 12 nm, so when we set 
 |:--:| 
 | *Process Corner test analysis for PC period 24 ns* |
 
-## Result  
+## <ins>Result</ins>
 
 <ins>**SRAM Read/Write Operation output in nominal conditions**</ins>
 
@@ -340,4 +363,4 @@ In our case the final Precharge signal OFF time is around 12 nm, so when we set 
 |:--:| 
 | *SRAM RD/WR* |
 
-## Conclusion
+## <ins>Conclusion</ins>
