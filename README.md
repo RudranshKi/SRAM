@@ -211,7 +211,7 @@ Inverter 1 is sized so that it's trip point is around the same value as that of 
 
 **Differential Amplifier transistor sizing**
 
-**----------------------------------------**
+**--------------------------------------------------------------**
 
 |  Transistor   |     Type      |     Width     |     Length    |
 | ------------- | ------------- | ------------- | ------------- |
@@ -226,7 +226,7 @@ Inverter 1 is sized so that it's trip point is around the same value as that of 
 
 **Inverter transistor sizing**
 
-**----------------------------------------**
+**------------------------------------------------------------**
 
 |  Inverter   |     Type      |     Width     |     Length    |
 | ------------- | ------------- | ------------- | ------------- |
