@@ -32,7 +32,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 
 
 ## <ins>Introduction</ins>
-16-byte SRAM array based on 6T design of SRAM. It reads and write 8 bits at once and the column is selected by a decoder which will decode the input address. While writing data onto SRAM cell, we provide a external source to forcefully alter the data stored. The data is drived by a buffer chain to effeciently write the data onto SRAM. And for reading we let the pre charged Bit Line (BL) or Bit Line Bar (BLB) value to drain to the stored value. While reading the sense amplifier senses the changes in BL and BLB, and amplifies the difference so as to provide the output fast without waiting for one of them to completely drain.
+16-byte SRAM array based on 6T design of SRAM. It reads and writes 8 bits at once and the column is selected by a decoder which will decode the input address. While writing data onto SRAM cell, we provide a external source to forcefully alter the data stored. The data is drived by a buffer chain to effeciently write the data onto SRAM. And for reading we let the pre charged Bit Line (BL) or Bit Line Bar (BLB) value to drain to the stored value. While reading the sense amplifier senses the changes in BL and BLB, and amplifies the difference so as to provide the output fast without waiting for one of them to completely drain.
 
 It is generally used as cache memory for it's ability to retain data for theoritically infinite time as long as supply is on and can be used for low powered IOT devices where speed and power consumption is a priority.
 
@@ -40,8 +40,7 @@ It is generally used as cache memory for it's ability to retain data for theorit
 
 ### <ins>6T SRAM cell</ins>
 
-
-![6T sram](https://github.com/RudranshKi/SRAM/assets/110120694/89d462e3-e65b-43b0-9cc5-0f13c9c6443c)
+![6T-SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/cd3955fe-db7d-4e36-a7fc-aa811675de4d)
 |:--:| 
 | *Sense amp (6T)* |
 
@@ -52,11 +51,11 @@ It is generally used as cache memory for it's ability to retain data for theorit
 
 Procedure for writing in 6T SRAM :
 
-    1. When pre charge is on , BL and BLB are charged to 1.8V.
+    1. When pre charge is on, BL and BLB are charged to 1.8V.
     2. The write signal latches the voltage sources to the BL and BLB.
-    2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input and similarly for the BLB.
-    3. The input sources for data we provide tries to forcefully alter the voltage in the SRAM inverter.
-    4. For that we need to find the appropriate sizing for the transistors involved in the data writing process.
+    2. When the access transistors are turned on using Word Line, there is a connection between BL and the SRAM's inverter input and similarly for the BLB.
+    3. The input sources for data we provide tries to forcefully alter the voltage in the SRAM inverter. (For that we need to find the appropriate sizing for the transistors involved in the data writing process.)
+    
 
 
 ![Write path(2)](https://github.com/RudranshKi/SRAM/assets/110120694/f6b08e97-d7b7-4e97-850e-75970814fb40)
@@ -65,7 +64,7 @@ Procedure for writing in 6T SRAM :
 
 Here we are trying to write 0V , so the node voltage is 0.3 and the inverter opposite to it has already swapped the values from 0 to 1.8V.
 
-Here the transistor , m5 is in saturation and m3 in linear according to **(VSD = VSG - VT)** eqn
+Here the transistor , m5 is in saturation and m3 in linear according to **(VSD = VSG - VT)** eqn.
 
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/d8718afc-2366-4b78-9f21-068d5cc97075)
 
@@ -73,14 +72,15 @@ Here the transistor , m5 is in saturation and m3 in linear according to **(VSD =
 
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/b17b9bf7-50f9-450c-a889-c6ce71778855)
 
+Note : *Vt = 0.67V (found from model files of the transistors)*
 
 ##### <ins>READ</ins>
 
 Procedure for reading in 6T SRAM :
 
-    1. When pre charge is on , the BL and BLB are charged to 1.8V.
-    2. When the access transistors are turned on using Word Line , there is a connection between BL and the inverter input.
-    3. Then BL and BLB start draining through the m1 node (if you're reading 0V else it will stay at pre charged value since acess transistor will never turn on).
+    1. When pre charge is on, the BL and BLB are charged to 1.8V.
+    2. When the access transistors are turned on using Word Line, there is a connection between BL and the inverter input and similarly for BLB.
+    3. Then BL and BLB start draining through the m1 node (if you're reading 0V else it will stay at pre charged value since acess transistor will never turn on since Vgs < Vt).
     4. The output is then extracted from BL and BLB after the voltages settle down.
     
 
@@ -91,7 +91,7 @@ Procedure for reading in 6T SRAM :
 
 Here we are trying to read 0V stored in the SRAM. For that we need to  find the operating mode of the transistors involved in reading it.
 
-Here transistor m3 is in saturation and m1 is in linear mode. Since both of them are connected in series, same current will flow through them.
+Here transistor m3 is in saturation and m1 is in linear mode according to **(VSD = VSG - VT)** eqn. Since both of them are connected in series, same current will flow through them.
 
 
 
@@ -103,10 +103,11 @@ To find the width for transistors in read operation :
 
 ![image](https://github.com/RudranshKi/SRAM/assets/110120694/ddd826ea-1617-49f3-8710-7f31487aa6ef)
 
+Note : *Vt = 0.67V (found from model files of the transistors)*
 
 ##### <ins>HOLD</ins>
 
-When the access transistors are off the data is hold onto the inverters of SRAM as long sufficent supply voltage is present.
+When the **access transistors** (m3 and m5) are off the data is hold onto the inverters of SRAM as long sufficent supply voltage is present.
 
 #### <ins>6T-SRAM Design</ins>
 
@@ -130,9 +131,9 @@ When the access transistors are off the data is hold onto the inverters of SRAM 
 |:--:| 
 | *Pre charge circuit* |
 
-when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB's caps charge to 1.8V or VDD. The sizes of PMOS transistors decide how fast BL and BLB can charge up. It is essential to maintain good performance to area ratio while sizing it.
+when the **PC (Pre charge)** signal is high (1.8V), the PMOSes turn on, BL and BLB's caps charge to 1.8V or VDD. The sizes of PMOS transistors decide how fast BL and BLB can charge up. It is essential to maintain good performance to area ratio while sizing it.
 
-Equalizer equalizes both the BL and BLB caps' voltage to same voltage.
+**Equalizer** equalizes both the BL and BLB caps' voltage to same voltage (during physical implementation the BL and BLB there will be leakage current which will drop the voltage of BL and BLB).
 
 In our case : 
 
@@ -148,9 +149,9 @@ In our case :
 |:--:| 
 | *Write driver using transmission gate* |
 
-When WR signal is high (1.8V) , the TG acts as short circuit and conducts current allowing the user to write the data to BL or BLB on command.
+When **WR (Write)** signal is high (1.8V) , the TG (Transmission Gate) acts as short circuit and conducts current allowing the user to write the data to BL or BLB on command.
 
-TG is used instead of simple NMOS or PMOS because if we use only NMOS then the node voltage BL or BLB will only be able to write (VGS- VT) which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write (VSG - VT) which is 0.67 or VT if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
+TG is used instead of simple NMOS or PMOS as switch because if we use only NMOS then the node voltage BL or BLB will only be able to write **(VGS - VT)** which is 1.13V instead of full 1.8V if the data is 1.8V and if we use PMOS then it will be only be abe to write **(VT)** if we write 0V to a node which has 1.8V stored in it. But using TG we can overcome that since both the mosfets will be turned on so for writing 1.8V the PMOS will be more suitable while writing 0V NMOS will be more suitable.
 
 Since, SRAM array has 16 SRAMs which will have some parasitic capacitance. To drive a huge capacitance we need short rise and fall time to decrease power loss and increase speed. For that we need to drive it efficently we will need increase the strength of the inverter connected to it. Since increasing the strength of the inverter we will need to increase the size of NMOS and PMOS in it but that will also consequently increase parasitic cap. So we have to create a ***Buffer chain*** with a stage ratio of 4:1. 
 
@@ -162,15 +163,16 @@ In our case the parasitic cap isn't huge so going from Inv 2X to Inv 1x for buff
 
 ### <ins>Row decoder</ins>
 
-To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on access transistors in the SRAM coloumn array.
-The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctrl*** signal is low , it switches the output of decoder to 0V but when it is on , it allows the normal functioning of the decoder to happen.
+To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on a specific access transistors in the SRAM coloumn array.
+The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctrl*** signal is low , it switches the output of decoder to 0V but when it is on , it allows the normal operation of the decoder.
+
+
 ![Row decoder](https://github.com/RudranshKi/SRAM/assets/110120694/02dcecdf-c576-459d-adcf-de4c7454270d)
 |:--:| 
 | *4x16 Row Decoder* |
 
 
-
-### <ins>Sense amplifier</ins>
+### <ins>Sense Amplifier</ins>
 <!---
 ![currentMirror](https://github.com/RudranshKi/SRAM/assets/110120694/7e8da5c7-4a1b-4a4b-8b7e-911817951e3c)
 |:--:| 
@@ -181,16 +183,20 @@ The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctr
 |:--:| 
 | *Sense Amplifier* |
 
-The main goal of first current mirror circuit (m5 and m0) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (m3 and m4) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
+The main goal of Sense Amplifier is to sense the output during the transition and amplify the result saving the transition time and increasing the speed of operation. 
+
+Here, the goal of first current mirror circuit (m5 and m0) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (m3 and m4) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
 
 
-When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Sense amplifier sizing](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing) for details on this)
+When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Sense Amplifier sizing](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing) for details on this)
 
-So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes.
+So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes. If BL goes lower than BLB, the node voltage ***Vsense*** will go lower than 0.9V and in vice versa it will go higher than 0.9V.
 
-We then use two inverters back to back to amplify that difference , so for e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading those, BL (pre charged to 1.8V) is going to go down to 0V but the current mirror circuit is going to sense that voltage dip in BL node and will try maintain the same current in the other node by decreasing the ***Vsense*** node voltage down from 0.9V , and this will be immediately reflected upon the first inverter which would have been sized such that it's trip point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable 1.8V or 0V (in this case 1.8V).
+We then use two inverters back to back to amplify that difference. 
 
-Then immediately the next inverter which also have a high gain will send the output to reflect the actual output (in our case 0V) immediately.
+
+For e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading those, BL (pre charged to 1.8V) is going to go down to 0V so the channel current will decrease. Consequently the current flow in transistor (m3) will also decrease. Since Path 1 current flow decreases , the current flow from Path 2 has to increase since they are in parallel and according to **KCL**, current through incoming nodes should be equal to outgoing node. But transistor (m4) with it's gate shorted with transistor (m3) 's gate node acts as current mirror , it will try to mirror the same current as of Path 1. So consequently , transistor (m2) has to discharge the Inv 1's input node to satisfy the current need which in turn will decrease the ***Vsense*** node voltage (Inv 1's parasitic cap which would have been charged to 0.9V will discharge through transistor (m2)). This will be immediately reflected upon the first inverter which would have been sized such that it's trip point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable 1.8V or 0V (in this case 1.8V).
+
 
 
 #### <ins>Sense amplifier Design</ins>
@@ -203,7 +209,7 @@ For sizing the current mirror we are first setting a transistor in saturation re
 |:--:| 
 | *Sizing setup* |
 
-Since ***Vnode*** is dawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for PMOS) and connect BL an BLB transistors to it. The NMOSes (m1 and m2) connecting the PMOS (m3 and m4) current mirror circuit to NMOS (m5 and m0) current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that trip point - 1.8V, below that trip point - 0v).
+Since ***Vnode*** is drawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for PMOS) and connect BL an BLB transistors to it. The NMOSes (m1 and m2) connecting the PMOS (m3 and m4) current mirror circuit to NMOS (m5 and m0) current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that trip point - 1.8V, below that trip point - 0v).
 
 
 
