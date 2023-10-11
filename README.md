@@ -24,8 +24,10 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
 4.  [Schematic Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
 5.  [Testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
-6.  [Result analysis](https://github.com/RudranshKi/SRAM/blob/main/README.md#result-analysis) 
-7.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion)
+6.  [Delays in SRAM](https://github.com/RudranshKi/SRAM#delays-in-sram)
+7.  [Operating Frequency Measurement](https://github.com/RudranshKi/SRAM#operating-frequency-measurement)
+8.  [Result](https://github.com/RudranshKi/SRAM/blob/main/README.md#result) 
+9.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion)
 
 
 
