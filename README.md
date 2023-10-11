@@ -45,10 +45,6 @@ It is generally used as cache memory for it's ability to retain data for theorit
 |:--:| 
 | *Sense amp (6T)* |
 
-1. 1 bit memory device
-2. 2 inverters connected in feedback
-3. As long as supply voltage is on, they retain the memory
-4. To write we need to forcefully manipulate the node voltages of the inverter
 
 #### <ins>Operation  </ins>
 
@@ -130,7 +126,7 @@ When the access transistors are off the data is hold onto the inverters of SRAM 
 
 ### <ins>Pre Charge Circuit</ins>
 
-![Precharge](https://github.com/RudranshKi/SRAM/assets/110120694/2aaccf0c-48a4-4f14-9a13-1747e99df3b6)
+![Precharge](https://github.com/RudranshKi/SRAM/assets/110120694/b2791dd2-160d-482f-bd65-570977d68ba4)
 |:--:| 
 | *Pre charge circuit* |
 
@@ -138,7 +134,13 @@ when the PC (pre charge) signal is high (1.8V), the PMOSes turn on , BL and BLB'
 
 Equalizer equalizes both the BL and BLB caps' voltage to same voltage.
 
-In our case : PMOS - W = 1u, L = 180 nm
+In our case : 
+
+|  Transistor   |     Type      |     Width     |     Length    |
+| ------------- | ------------- | ------------- | ------------- |
+|      m1       |    PMOS  |    1 &micro;m  |   180 nm  |
+|      m2       |    PMOS  |    1 &micro;m  |   180 nm  |
+|      m3       |    PMOS  |    220 nm  |   180 nm  |
 
 ### <ins>Write Driver</ins>
 
@@ -157,6 +159,7 @@ In ***Buffer chain*** we essentially gradually reduce the size of transistors ne
 
 
 In our case the parasitic cap isn't huge so going from Inv 2X to Inv 1x for buffer chain is enough.
+
 ### <ins>Row decoder</ins>
 
 To address 16 byte memory in our case , we need a 4x16 decoder. Which will take 4 bit address as input and then provide output signal to turn on access transistors in the SRAM coloumn array.
@@ -237,7 +240,7 @@ Inverter 1 is sized so that it's trip point is around the same value as that of 
 
 Supply Voltage : 1.8V
 
-Maximum operation frequency : 65 MHz
+Maximum operation frequency : 42 MHz
 
 Memory : 16 byte
 
