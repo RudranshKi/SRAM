@@ -268,7 +268,7 @@ Inside the blocks :
 |:--:| 
 | *16byte SRAM testbench* |
 
-![ADE_L_setup](https://github.com/RudranshKi/SRAM/assets/110120694/28315818-ae21-4090-b03b-511e78e9ca01)
+![ADE_L setup](https://github.com/RudranshKi/SRAM/assets/110120694/fd3d11d2-10ce-4c11-9c0e-5fc23abdc37c)
 |:--:| 
 | *Test settings* |
 
@@ -310,18 +310,18 @@ For finding out the maximum operating frequency for the SRAM:
 
 1. **PreCharge signal ON time**
 
-                    Take the maximum delay from all the process corner (for both 1 -> 0 and 0 -> 1) and increase the Precharge ON time by that (amount+20%)
+          Take the maximum delay from all the process corner (for both 1 -> 0 and 0 -> 1) and increase the Precharge ON time by that (amount+20%)
 
 2. **PreCharge signal OFF time**
 
-                    Take maximum delay of Precharge delay from all the process corner and increase the PreCharge OFF time by that (amount+20%)
+          Take maximum delay of Precharge delay from all the process corner and increase the PreCharge OFF time by that (amount+20%)
 
 
 For finding out the maximum frequency in which we can write in the SRAM:
 
 - **Write Signal ON time**
 
-                    Take maximum delay of Write delay from all the process corner and set the Write signal ON time by that (amount+20%)
+          Take maximum delay of Write delay from all the process corner and set the Write signal ON time by that (amount+20%)
   
 
 
@@ -336,7 +336,7 @@ In our case the final Precharge signal OFF time is around 12 nm, so when we set 
 
 <ins>**SRAM Read/Write Operation output in nominal conditions**</ins>
 
-![SRAM_working](https://github.com/RudranshKi/SRAM/assets/110120694/7b432393-22c6-406b-ade3-d529450b03a3)
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/980f3d51-9a6e-4792-add6-c0e01409dce8)
 |:--:| 
 | *SRAM RD/WR* |
 
