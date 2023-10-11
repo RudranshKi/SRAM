@@ -273,20 +273,58 @@ Inside the blocks :
 | *Test settings* |
 
 
-## Result analysis
-We tested SRAM memory array for different process and temperatures and below is the result.
-![Process corner](https://github.com/RudranshKi/SRAM/assets/110120694/73fc6827-fdd4-4e44-8dff-16a58ecff644)
-|:--:| 
-| *Process Corner test analysis* |
 
 
+## Terminology for delays
 
-**Read Delay** - Delay between the output and *Ctrl* signal's falling edge. (note : *Higher the better*)
+![Read_delay_1to0](https://github.com/RudranshKi/SRAM/assets/110120694/a88c925f-cab3-4882-b0b7-9f82602f043c)
+
+**Read (1 -> 0) Delay** - Delay between the falling edge of the output ( from 1.8V to 0V ) and *Ctrl* signal's falling edge. (note : *Lower the better*)
+
+![Read_delay_0to1](https://github.com/RudranshKi/SRAM/assets/110120694/c2706e74-d35d-42a2-bc29-b3e17082e012)
+
+**Read (0 -> 1) Delay** - Delay between the rising edge of the output ( from 0V to 1.8V ) and *Ctrl* signal's falling edge. (note : *Lower the better*)
+
+![Write delay](https://github.com/RudranshKi/SRAM/assets/110120694/7229d809-d66f-4f43-be5e-f257cf660012)
 
 **Write Delay** - Delay between the write signal's rising edge and falling or rising edge of the node voltage in SRAM cell. (note : *Lower the better*)
 
+![Precharge delay](https://github.com/RudranshKi/SRAM/assets/110120694/d0b0f239-4fb0-4e2e-af2d-0d122b0f331a)
+
 **Pre Charge Delay** - Time it takes for BL and BLB caps to charge upto 5% of VDD once pre charge signal is low (0V in our case). (note : *Lower the better*)
 
+
+
+## Operating Frequency Measurement
+We tested SRAM memory array for different process and temperatures and below is the result.
+
+![Process_corner_tp_11n](https://github.com/RudranshKi/SRAM/assets/110120694/cce5c8f1-6a87-466e-b2c9-06789c5444c7)
+|:--:| 
+| *Process Corner test analysis for PC period 22 ns* |
+
+
+Note : Here , we can see for Read Delay (1 -> 0) , for WP and WS in 85&deg;C , we are getting positive delay (i.e - The output settles at 0V after ***Ctrl*** signal)
+
+
+For finding out the maximum operating frequency for the SRAM:
+
+1. **PreCharge signal ON time**
+
+                    Take the maximum delay from all the process corner (for both 1 -> 0 and 0 -> 1) and increase the Precharge ON time by that (amount+20%)
+
+2. **PreCharge signal OFF time**
+
+                    Take maximum delay of Precharge delay from all the process corner and increase the PreCharge OFF time by that (amount+20%)
+
+
+For finding out the maximum frequency in which we can write in the SRAM:
+
+- **Write Signal ON time**
+
+                    Take maximum delay of Write delay from all the process corner and set the Write signal ON time by that (amount+20%)
+  
+
+In our case the final Precharge signal output is around 
 
 <ins>**SRAM Read/Write Operation output in nominal conditions**</ins>
 
