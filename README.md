@@ -360,7 +360,7 @@ For finding out the maximum frequency in which we can write in the SRAM:
 
 
 
-In our case the final Precharge signal OFF time is around 12 nm, so when we set the PC period to 24 nm , the Read delay falls well within margins (i.e - all of them are in negative so in every process corner the values settle before ***Ctrl*** turns off). 
+In our case the final Precharge signal ON time is around 12 nm, so when we set the PC period to 24 nm , the Read delay falls well within margins (i.e - all of them are in negative so in every process corner the values settle before ***Ctrl*** turns off). And pre charge delay is also within in the PC OFF time.
 
 ![Process_corner_tp_12n](https://github.com/RudranshKi/SRAM/assets/110120694/04774545-30f1-4779-b71b-c24a28c879a4)
 |:--:| 
