@@ -2,7 +2,7 @@
 
 SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM (Dynamic RAM) which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM as they don't need to be recharged before read operation to get the correct output and hence used as cache memory in processors. But while maintaining speed SRAM have to compromise with area.
 
-![BlockDiagram(1)](https://github.com/RudranshKi/SRAM/assets/110120694/83de02e1-7abe-420a-bdc5-cfb3cacf5f82)
+![BlockDiagram(2)](https://github.com/RudranshKi/SRAM/assets/110120694/cafe692e-5505-42c8-bab1-5b877550e78b)
 |:--:| 
 | *SRAM Block diagram* |
 
