@@ -2,7 +2,7 @@
 
 SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM (Dynamic RAM) which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM as they don't need to be recharged before read operation to get the correct output and hence used as cache memory in processors. But while maintaining speed SRAM have to compromise with area.
 
-![SRAM-BlockDiagram](https://github.com/RudranshKi/SRAM/assets/110120694/f8760390-6f61-42c9-aa3c-b663c23855ca)
+![BlockDiagram(1)](https://github.com/RudranshKi/SRAM/assets/110120694/83de02e1-7abe-420a-bdc5-cfb3cacf5f82)
 |:--:| 
 | *SRAM Block diagram* |
 
@@ -27,7 +27,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 6.  [Delays in SRAM](https://github.com/RudranshKi/SRAM#delays-in-sram)
 7.  [Operating Frequency Measurement](https://github.com/RudranshKi/SRAM#operating-frequency-measurement)
 8.  [Result](https://github.com/RudranshKi/SRAM/blob/main/README.md#result) 
-9.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion)
+<!-- 9.  [Conclusion](https://github.com/RudranshKi/SRAM/blob/main/README.md#conclusion) -->
 
 
 
@@ -374,4 +374,4 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
 |:--:| 
 | *SRAM RD/WR* |
 
-## <ins>Conclusion</ins>
+% ## <ins>Conclusion</ins>
