@@ -374,4 +374,4 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
 |:--:| 
 | *SRAM RD/WR* |
 
-% ## <ins>Conclusion</ins>
+<!-- ## <ins>Conclusion</ins> -->
