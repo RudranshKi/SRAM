@@ -316,9 +316,16 @@ Inside the blocks :
 
 ![Write delay](https://github.com/RudranshKi/SRAM/assets/110120694/7229d809-d66f-4f43-be5e-f257cf660012)
 |:--:| 
-| *Write Delay* |
+| *Write Delay (1->0)* |
 
-**Write Delay** - Delay between the write signal's rising edge and falling or rising edge of the node voltage in SRAM cell. (note : *Lower the better*)
+**Write Delay (1->0)** - Delay between the write signal's rising edge and falling edge of the node voltage in SRAM cell. (note : *Lower the better*)
+
+
+![Write_delay_0to1](https://github.com/RudranshKi/SRAM/assets/110120694/390f2774-1f4c-4548-a817-1d921d88853a)
+|:--:| 
+| *Write Delay (0->1)* |
+
+**Write Delay (0->1)** - Delay between the write signal's rising edge and rising edge of the node voltage in SRAM cell. (note : *Lower the better*)
 
 ![Precharge delay](https://github.com/RudranshKi/SRAM/assets/110120694/d0b0f239-4fb0-4e2e-af2d-0d122b0f331a)
 |:--:| 
