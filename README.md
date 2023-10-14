@@ -307,26 +307,26 @@ Inside the blocks :
 | *Read (1->0) Delay* |
 
 **Read (1 -> 0) Delay** - Delay between the falling edge of the output ( from 1.8V to 0V ) and *Ctrl* signal's falling edge. (note : *Lower the better*)
-
+<br><br><br>
 ![Read_delay_0to1](https://github.com/RudranshKi/SRAM/assets/110120694/c2706e74-d35d-42a2-bc29-b3e17082e012)
 |:--:| 
 | *Read (0->1) Delay* |
 
 **Read (0 -> 1) Delay** - Delay between the rising edge of the output ( from 0V to 1.8V ) and *Ctrl* signal's falling edge. (note : *Lower the better*)
-
+<br><br><br>
 ![Write delay](https://github.com/RudranshKi/SRAM/assets/110120694/7229d809-d66f-4f43-be5e-f257cf660012)
 |:--:| 
 | *Write Delay (1->0)* |
 
 **Write Delay (1->0)** - Delay between the write signal's rising edge and falling edge of the node voltage in SRAM cell. (note : *Lower the better*)
-
+<br><br><br>
 
 ![Write_delay_0to1](https://github.com/RudranshKi/SRAM/assets/110120694/390f2774-1f4c-4548-a817-1d921d88853a)
 |:--:| 
 | *Write Delay (0->1)* |
 
 **Write Delay (0->1)** - Delay between the write signal's rising edge and rising edge of the node voltage in SRAM cell. (note : *Lower the better*)
-
+<br><br><br>
 ![Precharge delay](https://github.com/RudranshKi/SRAM/assets/110120694/d0b0f239-4fb0-4e2e-af2d-0d122b0f331a)
 |:--:| 
 | *Pre Charge Delay* |
@@ -334,14 +334,13 @@ Inside the blocks :
 **Pre Charge Delay** - Time it takes for BL and BLB caps to charge upto 5% of VDD once pre charge signal is low (0V in our case). (note : *Lower the better*)
 
 
-
 ## <ins>Operating Frequency Measurement</ins>
 
 We tested SRAM memory array for different process and temperatures and below is the result.
 
-![Process_corner_tp_11n](https://github.com/RudranshKi/SRAM/assets/110120694/cce5c8f1-6a87-466e-b2c9-06789c5444c7)
+![Process Corner 14n before optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/02463143-1e71-40d2-ba70-e47e65effcad)
 |:--:| 
-| *Process Corner test analysis for PC period 22 ns* |
+| *Process Corner test analysis for PC period 15 ns* |
 
 
 Note : Here , we can see for Read Delay (1 -> 0) , for WP and WS in 85&deg;C , we are getting positive delay (i.e - The output settles at 0V after ***Ctrl*** signal)
@@ -367,11 +366,12 @@ For finding out the maximum frequency in which we can write in the SRAM:
 
 
 
-In our case the final Precharge signal ON time is around 12 nm, so when we set the PC period to 24 nm , the Read delay falls well within margins (i.e - all of them are in negative so in every process corner the values settle before ***Ctrl*** turns off). And pre charge delay is also within in the PC OFF time.
+In our case the final Precharge signal ON time is around 12 nm, so when we set the PC period to 18 ns , the Read delay falls well within margins (i.e - all of them are in negative so in every process corner the values settle before ***Ctrl*** turns off). And pre charge delay is also within in the PC OFF time.
 
-![Process_corner_tp_12n](https://github.com/RudranshKi/SRAM/assets/110120694/04774545-30f1-4779-b71b-c24a28c879a4)
+
+![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/2513c3c8-d5b5-4c60-956a-cd1bead43ed2)
 |:--:| 
-| *Process Corner test analysis for PC period 24 ns* |
+| *Process Corner test analysis for PC period 18 ns* |
 
 
 <details>
@@ -435,13 +435,16 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
                 # Save the plot as an image (e.g., PNG)
                 plt.savefig("table.png", bbox_inches='tight', pad_inches=0.1, dpi=300)
 
+
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/fef6f365-6359-49b4-9213-5de447d0868f)
+
 </details>
 
 ## <ins>Result</ins>
 
 <ins>**SRAM Read/Write Operation output in nominal conditions**</ins>
 
-![image](https://github.com/RudranshKi/SRAM/assets/110120694/980f3d51-9a6e-4792-add6-c0e01409dce8)
+![SRAM_Output](https://github.com/RudranshKi/SRAM/assets/110120694/1240962b-1b31-439f-ab4a-772c1ec6f5a5)
 |:--:| 
 | *SRAM RD/WR* |
 
