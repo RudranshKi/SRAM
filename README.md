@@ -338,9 +338,9 @@ Inside the blocks :
 
 We tested SRAM memory array for different process and temperatures and below is the result.
 
-![Process Corner 14n before optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/02463143-1e71-40d2-ba70-e47e65effcad)
+![Process Corner 14n before optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/bd6a1ff2-3626-419a-8c78-8c4e253b237e)
 |:--:| 
-| *Process Corner test analysis for PC period 15 ns* |
+| *Process Corner test analysis for PC period 17 ns* |
 
 
 Note : Here , we can see for Read Delay (1 -> 0) , for WP and WS in 85&deg;C , we are getting positive delay (i.e - The output settles at 0V after ***Ctrl*** signal)
@@ -369,11 +369,11 @@ For finding out the maximum frequency in which we can write in the SRAM:
 In our case the final Precharge signal ON time is around 12 nm, so when we set the PC period to 18 ns , the Read delay falls well within margins (i.e - all of them are in negative so in every process corner the values settle before ***Ctrl*** turns off). And pre charge delay is also within in the PC OFF time.
 
 
-![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/2513c3c8-d5b5-4c60-956a-cd1bead43ed2)
 |:--:| 
 | *Process Corner test analysis for PC period 18 ns* |
 
 
+![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355)
 <details>
 <summary>Process Corner verification python code</summary>
 
