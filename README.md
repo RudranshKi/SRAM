@@ -21,7 +21,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
     4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
     5. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
          - [Sense Amplifier Design](https://github.com/RudranshKi/SRAM#sense-amplifier-design)
-         - [Static Noise Margin of our 6-T SRAM]()
+         - [Static Noise Margin of our 6-T SRAM](https://github.com/RudranshKi/SRAM#static-noise-margin-of-our-6-t-sram)
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
 4.  [Schematic Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
 5.  [Testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
