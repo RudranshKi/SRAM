@@ -21,6 +21,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
     4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
     5. [Sense Amplifier](https://github.com/RudranshKi/SRAM#sense-amplifier)
          - [Sense Amplifier Design](https://github.com/RudranshKi/SRAM#sense-amplifier-design)
+         - [Static Noise Margin of our 6-T SRAM]()
 3.  [Specifications](https://github.com/RudranshKi/SRAM/blob/main/README.md#specifications)
 4.  [Schematic Design](https://github.com/RudranshKi/SRAM/blob/main/README.md#design)
 5.  [Testbench](https://github.com/RudranshKi/SRAM/blob/main/README.md#design-testbench)
@@ -124,6 +125,19 @@ When the **access transistors** (m3 and m5) are off the data is hold onto the in
 |      m5       |    PMOS  |    550 nm  |   180 nm  |
 |      m6       |    PMOS  |    550 nm  |   180 nm  |
 
+##### <ins>Static Noise Margin of our 6-T SRAM</ins>
+
+The noise margin of the device shows the noise tolerance of the device so that the output doesn't deviate from the intended output.
+
+
+In our case in inverters the noise margin for the output is generally given as :
+
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/722617bd-14eb-47c1-9edb-f2a1c5a7f594)
+
+Since, we are using back to back inverters for our SRAM, we will use the ***Butterfly technique*** to find the noise margin of both the inverters. In ***Butterfly technique*** we essentially plot noise margin of the both the inverters and place one in potrait and other in landscape so that they look like the wings of a butterfly. After that we try to fit the biggest square which won't step out of the boundries of each of the wing and from both the squares we take the one with the smallest area which will show the worst case noise margin of the SRAM. 
+
+Note - *It is essential to maintain a good noise margin for the SRAM so it can operate in enviornment with a lot of noise.*
+
 
 ### <ins>Pre Charge Circuit</ins>
 
@@ -179,7 +193,8 @@ The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctr
 | *Current mirror* |
 --->
 
-![Sense Amplifier](https://github.com/RudranshKi/SRAM/assets/110120694/82eb7710-86d3-4c27-9763-1824ddca2bf2)
+
+![sense amp](https://github.com/RudranshKi/SRAM/assets/110120694/ff0066cf-2671-451d-92b4-8ef47a24f9b5)
 |:--:| 
 | *Sense Amplifier* |
 
@@ -212,8 +227,14 @@ For sizing the current mirror we are first setting a transistor in saturation re
 Since ***Vnode*** is drawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for PMOS) and connect BL an BLB transistors to it. The NMOSes (m1 and m2) connecting the PMOS (m3 and m4) current mirror circuit to NMOS (m5 and m0) current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that trip point - 1.8V, below that trip point - 0v).
 
 
+[Gain of current mirror circuit.](https://github.com/RudranshKi/SRAM/assets/110120694/6b6121f2-419a-404a-b8c1-93fa8e254bfb)
 
-Inverter 1 is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
+Note : *Having a good gain for current mirror circuit is essential for faster operation since , if one of the nodes (BL or BLB) drops or increases by a very small amount (let's say for 200 mv) the node voltage ***Vsense*** will increase or decrease according to the gain amount (so if you have 30dB gain then just 200mv drop will be amplified by drop of 200mV*30 amount).*To increase the gain you need to burn more current and increase the sizing of the current mirror circuit.*
+
+
+*Inverter 1* is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
+
+
 
 **Differential Amplifier transistor sizing**
 
@@ -240,6 +261,13 @@ Inverter 1 is sized so that it's trip point is around the same value as that of 
 |      Inv 1       |    NMOS  |    500 nm  |    180 nm  |
 |      Inv 2       |    PMOS  |    6 &micro;m  |    180 nm  |
 |      Inv 2       |    NMOS  |    500 nm  |    180 nm  |
+
+
+<ins>**Differential amplifier (sense amplifier)  working output**</ins>
+![sense_output](https://github.com/RudranshKi/SRAM/assets/110120694/5c14caf6-b8f2-4633-9c42-deba45e8f490)
+
+
+
 
 
 ## <ins>Specifications</ins> 
@@ -375,7 +403,7 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
 
 ![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355)
 <details>
-<summary>Process Corner verification python code</summary>
+<summary>Python code to tabulate process coner data</summary>
 
                 import csv
                 import numpy as np
