@@ -232,7 +232,7 @@ Since ***Vnode*** is drawing the same current from the given current source we u
 Note : *Having a good gain for current mirror circuit is essential for faster operation since , if one of the nodes (BL or BLB) drops or increases by a very small amount (let's say for 200 mv) the node voltage ***Vsense*** will increase or decrease according to the gain amount (so if you have 30dB gain then just 200mv drop will be amplified by drop of 200mV*30 amount).*To increase the gain you need to burn more current and increase the sizing of the current mirror circuit.*
 
 
-*Inverter 1* is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
+**Inverter 1** is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
 
 
 
