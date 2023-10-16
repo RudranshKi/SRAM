@@ -63,7 +63,7 @@ Procedure for writing in 6T SRAM :
 |:--:| 
 | *WRITE PATH* |
 
-Here we are trying to write 0V , so the node voltage is 0.3 and the inverter opposite to it has already swapped the values from 0 to 1.8V.
+Here we are trying to write 0V , so the node voltage is 0.3V and the inverter opposite to it has already swapped the values from 0 to 1.8V.
 
 Here the transistor , m5 is in saturation and m3 in linear according to **(VSD = VSG - VT)** eqn.
 
@@ -127,7 +127,7 @@ When the **access transistors** (m3 and m5) are off the data is hold onto the in
 
 ##### <ins>Static Noise Margin of our 6-T SRAM</ins>
 
-The noise margin of the device shows the noise tolerance of the device so that the output doesn't deviate from the intended output.
+The noise margin of the device shows the noise tolerance of the device so that the output doesn't deviate from the intended output for a specific range of inputs.
 
 
 In our case in inverters the noise margin for the output is generally given as :
@@ -149,7 +149,7 @@ Note - *It is essential to maintain a good noise margin for the SRAM so it can o
 |:--:| 
 | *Pre charge circuit* |
 
-when the **PC (Pre charge)** signal is high (1.8V), the PMOSes turn on, BL and BLB's caps charge to 1.8V or VDD. The sizes of PMOS transistors decide how fast BL and BLB can charge up. It is essential to maintain good performance to area ratio while sizing it.
+when the **PC (Pre charge)** signal is high (1.8V), the PMOSes turn on, BL and BLB charges to 1.8V or VDD. The sizes of PMOS transistors decide how fast BL and BLB can charge up. It is essential to maintain good performance to area ratio while sizing it.
 
 **Equalizer** equalizes both the BL and BLB caps' voltage to same voltage (during physical implementation the BL and BLB there will be leakage current which will drop the voltage of BL and BLB).
 
@@ -197,8 +197,7 @@ The ***Ctrl*** signal acts as a enable signal for the row decoder so once ***Ctr
 | *Current mirror* |
 --->
 
-
-![sense amp](https://github.com/RudranshKi/SRAM/assets/110120694/ff0066cf-2671-451d-92b4-8ef47a24f9b5)
+![senseamp](https://github.com/RudranshKi/SRAM/assets/110120694/5f455770-a2de-453d-8ca9-91b7d485c484)
 |:--:| 
 | *Sense Amplifier* |
 
@@ -207,33 +206,34 @@ The main goal of Sense Amplifier is to sense the output during the transition an
 Here, the goal of first current mirror circuit (m5 and m0) is to mirror the current from the current source , so the circuit try to draw the same amount of current from the VDD source as that of current source connected. And the goal of second current mirror circuit (m3 and m4) is to mirror the current in the both nodes for BL and BLB (since they will try to mirror the current source's output and that current is going to mirrored again by this current mirror so effectively the current will get halved).
 
 
-When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Sense Amplifier sizing](https://github.com/RudranshKi/SRAM#differential-amplifier-sense-amp-tranistor-sizing) for details on this)
+When BL and BLB is is pre charged to 1.8V the node voltage at ***Vsense*** stabilizes at a certain node value after a certain time, in our case around 0.9V. (refer to [Sense Amplifier Design](https://github.com/RudranshKi/SRAM#sense-amplifier-design) for details on this)
 
-So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes. If BL goes lower than BLB, the node voltage ***Vsense*** will go lower than 0.9V and in vice versa it will go higher than 0.9V.
+So, once the node value of BL or BLB changes the node voltage ***Vsense*** is going to reflect it immediately as the current mirror circuit above is going to try and mirror the same current in both nodes. If BL goes lower than BLB, the node voltage ***Vsense*** will go lower than 0.9V and in vice versa for the node voltage.
 
 We then use two inverters back to back to amplify that difference. 
 
 
-For e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading those, BL (pre charged to 1.8V) is going to go down to 0V so the channel current will decrease. Consequently the current flow in transistor (m3) will also decrease. Since Path 1 current flow decreases , the current flow from Path 2 has to increase since they are in parallel and according to **KCL**, current through incoming nodes should be equal to outgoing node. But transistor (m4) with it's gate shorted with transistor (m3) 's gate node acts as current mirror , it will try to mirror the same current as of Path 1. So consequently , transistor (m2) has to discharge the Inv 1's input node to satisfy the current need which in turn will decrease the ***Vsense*** node voltage (Inv 1's parasitic cap which would have been charged to 0.9V will discharge through transistor (m2)). This will be immediately reflected upon the first inverter which would have been sized such that it's trip point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable 1.8V or 0V (in this case 1.8V).
+For e.g- we are reading BL - 0V, BLB - 1.8V, so when we are reading those, BL (pre charged to 1.8V) is going to go down to 0V so the channel current will decrease. Consequently the current flow in transistor (m3) will also decrease. Since Path 1 current flow decreases , the current flow from Path 2 has to increase since they are in parallel and according to **KCL**, current through incoming nodes should be equal to outgoing node. But transistors (m4 and m3) acts as current mirror , it will try to mirror the same current as of Path 1. So consequently , transistor (m2) has to discharge the Inv 1's input node to satisfy the current need which in turn will decrease the ***Vsense*** node voltage (Inv 1's parasitic cap which would have been charged to 0.9V will discharge through transistor (m2)). This will be immediately reflected upon the first inverter which would have been sized such that it's trip point is same 0.9V (i.e - When the input is 0.9V the output will also be 0.9V). Since the gain the first inverter is high, a slight amount of change in input is going to immediately send the output to one of the stable state (i.e- 1.8V or 0V (in this case 1.8V)).
 
 
 
 #### <ins>Sense amplifier Design</ins>
 
-For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (Sizing setup(only m6))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
+For sizing the current mirror we are first setting a transistor in saturation region by short circuting the gate node with source node so it always stays in the saturation region (saturation region because it has maximum current flow through it)(refer to fig (Sizing setup(only m5))). Then after setting a  **Gm / ID** ratio (between 10 - 4 with 4 being the best region), we set up a similar transistor in conjunction to it with same width and length so that same current flows through it since both of them have same resistance and same gate voltage.
 
 (*We are using Gm/ID to maintain a good saturation region*)
 
-![Current mirror(1)](https://github.com/RudranshKi/SRAM/assets/110120694/8678d862-4cc2-4aac-9bc0-5dc3c463c838)
+![Current mirror](https://github.com/RudranshKi/SRAM/assets/110120694/54d48703-a760-40d2-889a-083d211fe864)
+
 |:--:| 
 | *Sizing setup* |
 
-Since ***Vnode*** is drawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for PMOS) and connect BL an BLB transistors to it. The NMOSes (m1 and m2) connecting the PMOS (m3 and m4) current mirror circuit to NMOS (m5 and m0) current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that trip point - 1.8V, below that trip point - 0v).
+Since ***Vnode*** is drawing the same current from the given current source we use another current mirror circuit to mirror the same current (we size them using the above procedure again but for PMOS) and connect BL an BLB transistors to it. The NMOSes (m1 and m2) connecting the PMOS (m3 and m4) current mirror circuit to NMOS (m5 and m0) current mirror circuit is then connected to BL and BLB through their gates. We size them to maintain a specific ***Vsense*** node voltage which will act as a middle trip point for output (Above that trip point - 1.8V, below that trip point - 0V).
 
 
 [Gain of current mirror circuit.](https://github.com/RudranshKi/SRAM/assets/110120694/6b6121f2-419a-404a-b8c1-93fa8e254bfb)
 
-Note : *Having a good gain for current mirror circuit is essential for faster operation since , if one of the nodes (BL or BLB) drops or increases by a very small amount (let's say for 200 mv) the node voltage ***Vsense*** will increase or decrease according to the gain amount (so if you have 30dB gain then just 200mv drop will be amplified by drop of 200mV*30 amount).*To increase the gain you need to burn more current and increase the sizing of the current mirror circuit.*
+Note : *Having a good gain for current mirror circuit is essential for faster operation since , if one of the nodes (BL or BLB) drops or increases by a very small amount (let's say for 200 mv) the node voltage ***Vsense*** will increase or decrease according to the gain amount (so if you have 30dB gain then just 200mv drop will be amplified by drop of 200mV x 30 amount)*.*To increase the gain you need to burn more current and increase the sizing of the current mirror circuit.*
 
 
 **Inverter 1** is sized so that it's trip point is around the same value as that of ***Vsense***. So once the value falls below or above that trip point , it will immediately amplify the output to a stable voltage level (either 1.8V or 0V). Inverter 2 is used to amplify ***Vsense*** node voltage further and complement it to get the original value.
@@ -282,7 +282,7 @@ Maximum operation frequency : 42 MHz
 
 Memory : 16 byte
 
-
+Operable temperture : -40&deg;C to 85&deg;C
 ## <ins>Design</ins>
 
 #### SRAM
