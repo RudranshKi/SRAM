@@ -279,11 +279,17 @@ Note : *Having a good gain for current mirror circuit is essential for faster op
 
 Supply Voltage : 1.8V
 
-Maximum operation frequency : 42 MHz
+Total power consumption : ~270 &micro;w to 1.154 mw
+
+Maximum operation frequency : 52 MHz
 
 Memory : 16 byte
 
 Operable temperture : -40&deg;C to 85&deg;C
+
+
+Note : *To calculate the average power consumption we average the current draw from the supply voltages and multiply it with the supply voltage* 
+
 ## <ins>Design</ins>
 
 #### SRAM
