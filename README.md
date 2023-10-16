@@ -401,11 +401,9 @@ For finding out the maximum frequency in which we can write in the SRAM:
 In our case the final Precharge signal ON time is around 12 nm, so when we set the PC period to 18 ns , the Read delay falls well within margins (i.e - all of them are in negative so in every process corner the values settle before ***Ctrl*** turns off). And pre charge delay is also within in the PC OFF time.
 
 
+![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355)
 |:--:| 
 | *Process Corner test analysis for PC period 18 ns* |
-
-
-![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355)
 <details>
 <summary>Python code to tabulate process coner data</summary>
 
