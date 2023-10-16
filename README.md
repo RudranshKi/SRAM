@@ -16,7 +16,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
            2. [Read](https://github.com/RudranshKi/SRAM#read)
            3. [Hold](https://github.com/RudranshKi/SRAM#hold)
         - [6T-SRAM Design](https://github.com/RudranshKi/SRAM#Transistor-sizing)
-        - [Static Noise Margin of our 6-T SRAM](https://github.com/RudranshKi/SRAM#static-noise-margin-of-our-6-t-sram)
+     <!--   - [Static Noise Margin of our 6-T SRAM](https://github.com/RudranshKi/SRAM#static-noise-margin-of-our-6-t-sram)  -->
     2. [Pre charge circuit](https://github.com/RudranshKi/SRAM#pre-charge-circuit)
     3. [Write driver](https://github.com/RudranshKi/SRAM#write-driver)
     4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
@@ -124,7 +124,7 @@ When the **access transistors** (m3 and m5) are off the data is hold onto the in
 |      m4       |    NMOS  |    220 nm  |   180 nm  |
 |      m5       |    PMOS  |    550 nm  |   180 nm  |
 |      m6       |    PMOS  |    550 nm  |   180 nm  |
-
+<!--
 ##### <ins>Static Noise Margin of our 6-T SRAM</ins>
 
 The noise margin of the device shows the noise tolerance of the device so that the output doesn't deviate from the intended output for a specific range of inputs.
@@ -142,6 +142,7 @@ Since, we are using back to back inverters for our SRAM, we will use the ***Butt
 
 Note - *It is essential to maintain a good noise margin for the SRAM so it can operate in enviornment with a lot of noise.*
 
+-->
 
 ### <ins>Pre Charge Circuit</ins>
 
