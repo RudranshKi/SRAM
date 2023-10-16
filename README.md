@@ -286,7 +286,8 @@ Memory : 16 byte
 ## <ins>Design</ins>
 
 #### SRAM
-![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/ae33b882-690b-4494-ae0e-6dcd1ddd0309)
+
+![16 byte SRAM](https://github.com/RudranshKi/SRAM/assets/110120694/fae3615e-da03-445c-82b2-c7b4f9d814f8)
 |:--:| 
 | *16 byte SRAM* |
 
