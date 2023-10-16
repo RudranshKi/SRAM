@@ -136,6 +136,10 @@ In our case in inverters the noise margin for the output is generally given as :
 
 Since, we are using back to back inverters for our SRAM, we will use the ***Butterfly technique*** to find the noise margin of both the inverters. In ***Butterfly technique*** we essentially plot noise margin of the both the inverters and place one in potrait and other in landscape so that they look like the wings of a butterfly. After that we try to fit the biggest square which won't step out of the boundries of each of the wing and from both the squares we take the one with the smallest area which will show the worst case noise margin of the SRAM. 
 
+![SNM](https://github.com/RudranshKi/SRAM/assets/110120694/4c08b78a-e7e8-464b-875d-40fd0f1b4450)
+|:--:| 
+| *Static Noise Margin for 6-T SRAM* |
+
 Note - *It is essential to maintain a good noise margin for the SRAM so it can operate in enviornment with a lot of noise.*
 
 
