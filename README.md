@@ -9,7 +9,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
 ## Table of contents        
 
 1.  [Introduction](https://github.com/RudranshKi/SRAM/blob/main/README.md#about)
-2.  [SRAM Circuit](https://github.com/RudranshKi/SRAM/blob/main/README.md#Cells-Used)
+2.  [SRAM Circuit](https://github.com/RudranshKi/SRAM/blob/main/README.md#SRAM-Circuit)
     1. [6T SRAM cell](https://github.com/RudranshKi/SRAM#6t-sram-cell)
         - [Operations](https://github.com/RudranshKi/SRAM#operation)
            1. [Write](https://github.com/RudranshKi/SRAM#write)
