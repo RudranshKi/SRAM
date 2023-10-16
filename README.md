@@ -372,7 +372,7 @@ Inside the blocks :
 We tested SRAM memory array for different process and temperatures and below is the result.
 
 <!--![Process Corner 14n before optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/bd6a1ff2-3626-419a-8c78-8c4e253b237e) -->
-![image](https://github.com/RudranshKi/SRAM/assets/110120694/f212a79e-18be-45cd-ba99-ca2651729a8e)
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/8fa48e3d-3956-44c3-9a69-8c34cdf7d263)
 |:--:| 
 | *Process Corner test analysis for PC period 17 ns* |
 
@@ -404,7 +404,7 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
 
 
 <!-- ![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355) -->
-![image](https://github.com/RudranshKi/SRAM/assets/110120694/a4713549-0670-470c-8425-a8f0eb1ede95)
+![image](https://github.com/RudranshKi/SRAM/assets/110120694/735794ea-0762-40aa-9644-44f5f431f82f)
 |:--:| 
 | *Process Corner test analysis for PC period 18 ns* |
 
