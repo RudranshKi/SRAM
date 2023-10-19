@@ -16,7 +16,7 @@ SRAM (Static Random Access Memory) is a type of RAM which stores data indefinite
            2. [Read](https://github.com/RudranshKi/SRAM#read)
            3. [Hold](https://github.com/RudranshKi/SRAM#hold)
         - [6T-SRAM Design](https://github.com/RudranshKi/SRAM#Transistor-sizing)
-     <!--   - [Static Noise Margin of our 6-T SRAM](https://github.com/RudranshKi/SRAM#static-noise-margin-of-our-6-t-sram)  -->
+        - [Static Noise Margin of our 6-T SRAM](https://github.com/RudranshKi/SRAM#static-noise-margin-of-our-6-t-sram)  
     2. [Pre charge circuit](https://github.com/RudranshKi/SRAM#pre-charge-circuit)
     3. [Write driver](https://github.com/RudranshKi/SRAM#write-driver)
     4. [Row decoder](https://github.com/RudranshKi/SRAM/tree/main#row-decoder)
@@ -124,7 +124,7 @@ When the **access transistors** (m3 and m5) are off the data is hold onto the in
 |      m4       |    NMOS  |    220 nm  |   180 nm  |
 |      m5       |    PMOS  |    550 nm  |   180 nm  |
 |      m6       |    PMOS  |    550 nm  |   180 nm  |
-<!--
+
 ##### <ins>Static Noise Margin of our 6-T SRAM</ins>
 
 The noise margin of the device shows the noise tolerance of the device so that the output doesn't deviate from the intended output for a specific range of inputs.
@@ -142,7 +142,7 @@ Since, we are using back to back inverters for our SRAM, we will use the ***Butt
 
 Note - *It is essential to maintain a good noise margin for the SRAM so it can operate in enviornment with a lot of noise.*
 
--->
+
 
 ### <ins>Pre Charge Circuit</ins>
 
@@ -379,9 +379,10 @@ Inside the blocks :
 We tested SRAM memory array for different process and temperatures and below is the result.
 
 <!--![Process Corner 14n before optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/bd6a1ff2-3626-419a-8c78-8c4e253b237e) -->
-![image](https://github.com/RudranshKi/SRAM/assets/110120694/8fa48e3d-3956-44c3-9a69-8c34cdf7d263)
+
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/87e900c1-da26-477b-97ef-e761dbbaa561)
 |:--:| 
-| *Process Corner test analysis for PC period 17 ns* |
+| *Process Corner test analysis for PC period 14ns PC ON time, 3ns PC OFF time* |
 
 
 Note : Here , we can see for Read Delay (1 -> 0) , for WP and WS in 85&deg;C , we are getting positive delay (i.e - The output settles at 0V after ***Ctrl*** signal)
@@ -411,29 +412,33 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
 
 
 <!-- ![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355) -->
-![image](https://github.com/RudranshKi/SRAM/assets/110120694/735794ea-0762-40aa-9644-44f5f431f82f)
+
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/f922bb78-9776-46b5-ab6b-9fcb05983846)
 |:--:| 
-| *Process Corner test analysis for PC period 18 ns* |
+| *Process Corner test analysis for PC period 17ns PC ON time, 1ns PC OFF time* |
 
 **So, for a safer side we will use PC period 19 ns.**
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/6cf8bc7f-6ab3-400d-897a-e82ee5b4309f)
+|:--:| 
+| *Process Corner test analysis for PC period 18ns PC ON time, 1ns PC OFF time* |
+
 <br><br>
 <details>
 <summary>Python code to tabulate process coner data</summary>
-
+    
                 import csv
                 import numpy as np
                 from tabulate import tabulate
                 import matplotlib.pyplot as plt
+                filename = "14_3n.csv"
                 
                 corner = [[] for _ in range(7)]
-                
                 pcorner = [[] for _ in range(7)]
-                
                 rows_skip = [0,1,2,3,4,5,7,9,10,11,12,13,14,15,16]
                 
-                corner[0], corner[1], corner[2], corner[3], corner[4], corner[5],corner[6] = np.loadtxt("processcorner.csv", delimiter=",", usecols=(2,8, 9, 10, 11, 12, 13), skiprows=17, unpack=True, dtype=float)
-                
-                pcorner[0], pcorner[1], pcorner[2], pcorner[3], pcorner[4], pcorner[5],pcorner[6] = np.loadtxt("processcorner.csv", delimiter=",", usecols=(2,8, 9, 10, 11, 12, 13), max_rows=9, unpack=True, dtype=str)
+                corner[0], corner[1], corner[2], corner[3], corner[4], corner[5],corner[6] = np.loadtxt(filename, delimiter=",", usecols=(2,8, 9, 10, 11, 12, 13), skiprows=13, unpack=True, dtype=float)
+                minimum,maximum = np.loadtxt(filename, delimiter=",", usecols=(6,7), skiprows=13, unpack=True, dtype=float)
+                pcorner[0], pcorner[1], pcorner[2], pcorner[3], pcorner[4], pcorner[5],pcorner[6] = np.loadtxt(filename, delimiter=",", usecols=(2,8, 9, 10, 11, 12, 13), max_rows=9, unpack=True, dtype=str)
                 
                 for i in range(len(pcorner)) :
                     pcorner[i][0] = pcorner[i][5]
@@ -447,29 +452,37 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
                 
                 for i in range(7):
                     corner[i] = [convertNanoSecond(value) for value in corner[i]]
+                    
                 
-                read1to0  = [corner[0][0], corner[1][0], corner[2][0], corner[3][0], corner[4][0], corner[5][0],corner[6][0]]
-                read0to1  = [corner[0][1], corner[1][1], corner[2][1], corner[3][1], corner[4][1], corner[5][1],corner[6][1]]
-                precharge = [corner[0][2], corner[1][2], corner[2][2], corner[3][2], corner[4][2], corner[5][2],corner[6][2]]
-                write1to0 = [corner[0][3], corner[1][3], corner[2][3], corner[3][3], corner[4][3], corner[5][3],corner[6][3]]
-                write0to1 = [corner[0][4], corner[1][4], corner[2][4], corner[3][4], corner[4][4], corner[5][4],corner[6][4]]
+                for i in range(7):
+                    minimum[i] = convertNanoSecond(minimum[i])
+                for i in range(7):
+                    maximum[i] = convertNanoSecond(maximum[i])
                 
-                col_names = ["Delay Output"] + ["mos: " + pcorner[i][0] + ", \ntemp :"+pcorner[i][1]+" °C" for i in range(7)]
+                
+                read1to0  = [corner[0][0], corner[1][0], corner[2][0], corner[3][0], corner[4][0], corner[5][0],corner[6][0],minimum[0],maximum[0]]
+                read0to1  = [corner[0][1], corner[1][1], corner[2][1], corner[3][1], corner[4][1], corner[5][1],corner[6][1],minimum[1],maximum[1]]
+                precharge = [corner[0][2], corner[1][2], corner[2][2], corner[3][2], corner[4][2], corner[5][2],corner[6][2],minimum[2],maximum[2]]
+                write1to0 = [corner[0][3], corner[1][3], corner[2][3], corner[3][3], corner[4][3], corner[5][3],corner[6][3],minimum[3],maximum[3]]
+                write0to1 = [corner[0][4], corner[1][4], corner[2][4], corner[3][4], corner[4][4], corner[5][4],corner[6][4],minimum[4],maximum[4]]
+                
+                
+                col_names = ["Delay Output"] + ["mos: " + pcorner[i][0] + ", \ntemp :"+pcorner[i][1]+" °C" for i in range(7)] + ["Minimum"] + ["Maximum"]
                 
                 data = [
                     ["read 0 from 1"]  + [f"{value:.3f} nS" for value in read1to0],
                     ["read 1 from 0"]  + [f"{value:.3f} nS" for value in read0to1],
                     ["Precharge"]      + [f"{value:.3f} nS" for value in precharge],
                     ["Write 0 from 1"] + [f"{value:.3f} nS" for value in write1to0],
-                    ["Write 1 from 0"] + [f"{value:.3f} nS" for value in write0to1]
-                ]
+                    ["Write 1 from 0"] + [f"{value:.3f} nS" for value in write0to1],
+                    ]
                 
                 
                 print(tabulate(data, headers=col_names, tablefmt="fancy_grid", showindex="always"))
                 
                 table = tabulate(data, headers=col_names, tablefmt="fancy_grid", showindex="always")
                 
-                plt.figure(figsize=(10, 6))
+                plt.figure(figsize=(10, 7))
                 plt.axis('off')  # Turn off axis
                 
                 # Render the table as text and add it to the plot
@@ -479,7 +492,10 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
                 plt.savefig("table.png", bbox_inches='tight', pad_inches=0.1, dpi=300)
 
 
-![table](https://github.com/RudranshKi/SRAM/assets/110120694/fef6f365-6359-49b4-9213-5de447d0868f)
+
+
+
+
 
 </details>
 
