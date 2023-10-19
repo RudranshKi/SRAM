@@ -380,7 +380,7 @@ We tested SRAM memory array for different process and temperatures and below is 
 
 <!--![Process Corner 14n before optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/bd6a1ff2-3626-419a-8c78-8c4e253b237e) -->
 
-![table](https://github.com/RudranshKi/SRAM/assets/110120694/87e900c1-da26-477b-97ef-e761dbbaa561)
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/6010969c-5424-4627-813f-c8755957a4e4)
 |:--:| 
 | *Process Corner test analysis for PC period 14ns PC ON time, 3ns PC OFF time* |
 
@@ -412,13 +412,13 @@ In our case the final Precharge signal ON time is around 12 nm, so when we set t
 
 
 <!-- ![Process corner 17n after optimizations](https://github.com/RudranshKi/SRAM/assets/110120694/1fbf564e-bb4c-4a1e-bd7a-359f72a9e355) -->
-
-![table](https://github.com/RudranshKi/SRAM/assets/110120694/f922bb78-9776-46b5-ab6b-9fcb05983846)
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/e5c09e0b-e0c5-4353-b3e4-f18805165a0d)
 |:--:| 
 | *Process Corner test analysis for PC period 17ns PC ON time, 1ns PC OFF time* |
 
 **So, for a safer side we will use PC period 19 ns.**
-![table](https://github.com/RudranshKi/SRAM/assets/110120694/6cf8bc7f-6ab3-400d-897a-e82ee5b4309f)
+
+![table](https://github.com/RudranshKi/SRAM/assets/110120694/2094eb5e-3a20-4b60-9598-6fddc4b6a306)
 |:--:| 
 | *Process Corner test analysis for PC period 18ns PC ON time, 1ns PC OFF time* |
 
