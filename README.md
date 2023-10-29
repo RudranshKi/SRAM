@@ -2,7 +2,7 @@
 
 SRAM (Static Random Access Memory) is a type of RAM which stores data indefinitely as long as there is power unlike DRAM (Dynamic RAM) which loses data gradually even if they are powered. They store 1 bit of data and is faster than DRAM as they don't need to be recharged before read operation to get the correct output and hence used as cache memory in processors. But while maintaining speed SRAM have to compromise with area.
 
-![BlockDiagram(2)](https://github.com/RudranshKi/SRAM/assets/110120694/cafe692e-5505-42c8-bab1-5b877550e78b)
+![sram_block drawio](https://github.com/RudranshKi/SRAM/assets/110120694/a74bc785-c224-4686-a5f7-d7e493ad0010)
 |:--:| 
 | *SRAM Block diagram* |
 
@@ -152,6 +152,19 @@ Note - *It is essential to maintain a good noise margin for the SRAM so it can o
 
 Note : *So 0.64v Noise margin for our design*
 
+<details>
+<summary>Algorithm for finding SNM</summary>
+    
+1. Import the CSV file of the inverters' DC sweep values.    
+2. Separate the values for Q vs QB X-axis, Q vs QB Y-axis, QB vs Q X-axis, QB vs Q Y-axis.
+3. Declare a length for the line segments.
+4. For both the lobes, we initially mark the points with -1 slope.
+5. Then plot line segments from the points in both 90 degrees and 0 degrees so that the line segments from the two opposite points converge with each other to form a rectangle.
+6. Then check the distance between the point on slope points and the intersection points , if the magnitude is equal or almost equal to each other. If not we move to step 7.
+7. We then check the same for the next point of the any of the two graph (suppose in first lobe, either QB vs Q  or Q vs QB) (note : we change the points only between half of the points on the graph so as to decrease the simulation time of the program).
+8. Once we find the difference between the magnitude of all the Q vs QB to intersection and QB vs Q to intersection , we sort them in ascending order.
+9. After both lobes are done, compare and plot the square for the lobe with lowest magnitude for X-axis 
+</details>
 <details>
 <summary>PYTHON code to measure SNM</summary>
     
