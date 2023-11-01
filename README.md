@@ -153,17 +153,60 @@ Note - *It is essential to maintain a good noise margin for the SRAM so it can o
 Note : *So 0.64v Noise margin for our design*
 
 <details>
-<summary>Algorithm for finding SNM</summary>
+<summary>Pseudo code for finding SNM</summary>
     
-1. Import the CSV file of the inverters' DC sweep values.    
-2. Separate the values for Q vs QB X-axis, Q vs QB Y-axis, QB vs Q X-axis, QB vs Q Y-axis.
-3. Declare a length for the line segments.
-4. For both the lobes, we initially mark the points with -1 slope.
-5. Then plot line segments from the points in both 90 degrees and 0 degrees so that the line segments from the two opposite points converge with each other to form a rectangle.
-6. Then check the distance between the point on slope points and the intersection points , if the magnitude is equal or almost equal to each other. If not we move to step 7.
-7. We then check the same for the next point of the any of the two graph (suppose in first lobe, either QB vs Q  or Q vs QB) (note : we change the points only between half of the points on the graph so as to decrease the simulation time of the program).
-8. Once we find the difference between the magnitude of all the Q vs QB to intersection and QB vs Q to intersection , we sort them in ascending order.
-9. After both lobes are done, compare and plot the square for the lobe with lowest magnitude for X-axis 
+    This program will generate the DC sweep plot of the SRAM and measure it's SNM
+    
+    import snm.csv
+    
+    store Q vs QB and QB vs Q array points from the csv file
+    
+    line_segment_length = X
+    
+    function check_for_negative_slope :
+            substract Point(X) from Point(X+1) call it dervX
+            substract Point(Y) from Point(Y+1) call it dervY
+            calculate slope = dervX / dervY
+            compare it with threshold value if it matches :
+                               slope_pairs =  store X, Y coordinates
+    
+    
+    
+    function find_intersection :
+            check for line segment intersection
+    
+    for lobe 1
+    
+    for i in range of Q vs QB array :
+            call check_for_negative_slope
+    
+    
+    Draw vertical line (X1,Y1),(X2,Y2) from slope_pairs
+    line_segment1 = (X1,Y1) and (X2,Y2)
+    Draw horizontal line (X1,Y1),(X2,Y2) from slope_pairs 
+    line_segment2 = (X1,Y1) and (X2,Y2)
+    
+    for i in range of QB vs Q array for 50/2 points :
+                    line_segment3 = (X1,Y1) and (X2,Y2)
+                    line_segment4 = (X1,Y1) and (X2,Y2)
+                    intersection_1 = line_segment1 and line_segment3
+                    intersection_2 = line_segment2 and line_segment4
+    
+                    difference = ( line_segment1(X1,Y1) and intersection_1 (X1,Y1) ) from ( line_segment2(X1,Y1) and intersection_2 (X1,Y1) )
+    
+                    point_pairs= store line_segments (X1,Y1) , intersections (X1,Y1) and difference
+    
+    
+    find the pairs with least difference
+    
+    repeat the same for lobe 2
+    
+    compare dx for both lobe 1 and lobe 2 :
+            if dx_lobe 1 < dx_lobe 2 :
+                    plot lobe 1
+            else :
+                    plot lobe 2
+                  
 </details>
 <details>
 <summary>PYTHON code to measure SNM</summary>
