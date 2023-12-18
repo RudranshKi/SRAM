@@ -52,10 +52,10 @@ It is generally used as cache memory for it's ability to retain data for theorit
 
 Procedure for writing in 6T SRAM :
 
-    1. When pre charge is on, BL and BLB are charged to 1.8V.
-    2. The write signal latches the voltage sources to the BL and BLB.
-    2. When the access transistors are turned on using Word Line, there is a connection between BL and the SRAM's inverter input and similarly for the BLB.
-    3. The input sources for data we provide tries to forcefully alter the voltage in the SRAM inverter. (For that we need to find the appropriate sizing for the transistors involved in the data writing process.)
+1. When pre charge is on, BL and BLB are charged to 1.8V.
+2. The write signal latches the voltage sources to the BL and BLB.
+2. When the access transistors are turned on using Word Line, there is a connection between BL and the SRAM's inverter input and similarly for the BLB.
+3. The input sources for data we provide tries to forcefully alter the voltage in the SRAM inverter. (For that we need to find the appropriate sizing for the transistors involved in the data writing process.)
     
 
 
@@ -79,10 +79,10 @@ Note : *Vt = 0.67V (found from model files of the transistors)*
 
 Procedure for reading in 6T SRAM :
 
-    1. When pre charge is on, the BL and BLB are charged to 1.8V.
-    2. When the access transistors are turned on using Word Line, there is a connection between BL and the inverter input and similarly for BLB.
-    3. Then BL and BLB start draining through the m1 node (if you're reading 0V else it will stay at pre charged value since acess transistor will never turn on since Vgs < Vt).
-    4. The output is then extracted from BL and BLB after the voltages settle down.
+1. When pre charge is on, the BL and BLB are charged to 1.8V.
+2. When the access transistors are turned on using Word Line, there is a connection between BL and the inverter input and similarly for BLB.
+3. Then BL and BLB start draining through the m1 node (if you're reading 0V else it will stay at pre charged value since acess transistor will never turn on since Vgs < Vt).
+4. The output is then extracted from BL and BLB after the voltages settle down.
     
 
 ![Read path](https://github.com/RudranshKi/SRAM/assets/110120694/1874556d-4508-41e1-ae91-1c91b54084a2)
