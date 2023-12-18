@@ -567,7 +567,6 @@ For sizing the current mirror we are first setting a transistor in saturation re
 (*We are using Gm/ID to maintain a good saturation region*)
 
 ![Current mirror](https://github.com/RudranshKi/SRAM/assets/110120694/54d48703-a760-40d2-889a-083d211fe864)
-
 |:--:| 
 | *Sizing setup* |
 
